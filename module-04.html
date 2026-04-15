@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 04: Data Platform Modernisation — AI Leadership Hub</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16; --lime-dark: #4D7C0F;
+  --white: #FAFAF9; --off: #F5F5F4; --ink: #1C1917; --mid: #78716C; --border: #E7E5E4;
+  --f-display: 'Syne', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 0.6rem; }
+.nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--electric); animation: blink 2.5s ease-in-out infinite; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-cta { background: var(--electric); color: #fff; padding: 0.55rem 1.35rem; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px; transition: background 0.2s; }
+.nav-cta:hover { background: #4338CA; }
+
+.module-hero { padding: 9rem 3rem 5rem; background: var(--ink); color: var(--white); position: relative; overflow: hidden; }
+.module-hero::after { content: '04'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: var(--f-display); font-size: clamp(12rem, 22vw, 22rem); font-weight: 800; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; user-select: none; line-height: 1; }
+.module-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.4); margin-bottom: 1.5rem; }
+.module-breadcrumb a { color: var(--electric-light); transition: color 0.2s; }
+.module-breadcrumb span { opacity: 0.3; }
+.module-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(79,70,229,0.25); color: var(--electric-light); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 600; margin-bottom: 1.5rem; }
+.module-hero h1 { font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; max-width: 700px; margin-bottom: 1.5rem; position: relative; }
+.module-hero h1 span { color: var(--lime); }
+.module-hero-sub { font-size: 1.05rem; color: rgba(250,250,249,0.6); max-width: 580px; line-height: 1.75; margin-bottom: 3rem; position: relative; }
+.module-meta { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; }
+.meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+.meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.35); }
+.meta-val { font-size: 0.9rem; font-weight: 500; color: rgba(250,250,249,0.85); }
+
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--lime); z-index: 200; width: 0%; }
+.module-layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; gap: 5rem; align-items: start; }
+.sidebar { position: sticky; top: 6rem; }
+.sidebar-label { font-family: var(--f-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; }
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+.sidebar-nav a { display: block; padding: 0.5rem 0.75rem; font-size: 0.82rem; color: var(--mid); border-radius: 6px; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s, background 0.2s; line-height: 1.4; }
+.sidebar-nav a:hover { color: var(--ink); background: var(--off); }
+.sidebar-nav a.active { color: var(--electric); border-left-color: var(--electric); background: #EEF2FF; font-weight: 600; }
+.sidebar-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+.sidebar-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--mid); padding: 0.4rem 0; transition: color 0.2s; }
+.sidebar-back:hover { color: var(--electric); }
+
+.module-content { max-width: 680px; }
+.content-section { margin-bottom: 5rem; scroll-margin-top: 7rem; }
+.section-num { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-num::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
+.content-section h2 { font-family: var(--f-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+.content-section p { color: var(--mid); line-height: 1.85; margin-bottom: 1.25rem; font-size: 1rem; }
+.content-section p strong { color: var(--ink); font-weight: 600; }
+
+.callout { background: #EEF2FF; border-left: 3px solid var(--electric); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.5rem; }
+.callout p { color: #3730A3; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+.callout-warning { background: #FFFBEB; border-left: 3px solid #F59E0B; border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-warning .callout-label { color: #92400E; }
+.callout-warning p { color: #78350F; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+
+.real-world { background: var(--ink); border-radius: 16px; padding: 1.75rem 2rem; margin: 2rem 0; color: var(--white); }
+.real-world-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.75rem; }
+.real-world p { color: rgba(250,250,249,0.7); font-size: 0.95rem; line-height: 1.75; margin-bottom: 0; }
+.real-world p strong { color: var(--white); }
+
+.takeaways { background: var(--off); border-radius: 16px; padding: 1.75rem 2rem; margin: 2.5rem 0; }
+.takeaways-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.takeaways-label::before { content: '✦'; font-size: 0.6rem; color: var(--lime); }
+.takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.takeaway-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+.takeaway-list li::before { content: '→'; color: var(--electric); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+
+.platform-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+.platform-table th { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.75rem 1rem; text-align: left; background: var(--off); border-bottom: 2px solid var(--border); }
+.platform-table th:first-child { border-radius: 8px 0 0 0; }
+.platform-table th:last-child { border-radius: 0 8px 0 0; }
+.platform-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); color: var(--mid); vertical-align: top; }
+.platform-table td:first-child { font-weight: 600; color: var(--ink); }
+.platform-table tr:last-child td { border-bottom: none; }
+.platform-table tr:hover td { background: var(--off); }
+
+.migration-phases { display: flex; flex-direction: column; gap: 0; margin: 2rem 0; }
+.phase { display: grid; grid-template-columns: 120px 1fr; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); align-items: start; }
+.phase:last-child { border-bottom: none; }
+.phase-label { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.1rem; }
+.phase-num { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric); }
+.phase-name { font-family: var(--f-display); font-size: 0.9rem; font-weight: 800; line-height: 1.2; color: var(--ink); }
+.phase-duration { font-size: 0.72rem; color: var(--mid); margin-top: 0.2rem; }
+.phase-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.7; }
+.phase-desc strong { color: var(--ink); }
+
+.pitfalls { display: flex; flex-direction: column; gap: 0.75rem; margin: 2rem 0; }
+.pitfall { display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 1.25rem; border: 1.5px solid #FEE2E2; border-radius: 12px; background: #FFF5F5; }
+.pitfall-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.pitfall-title { font-family: var(--f-display); font-size: 0.88rem; font-weight: 700; color: #B91C1C; margin-bottom: 0.2rem; }
+.pitfall-desc { font-size: 0.82rem; color: #7F1D1D; line-height: 1.6; }
+
+.prev-next { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.prev-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; transition: border-color 0.2s, color 0.2s; }
+.prev-link:hover { border-color: var(--ink); color: var(--ink); }
+
+.next-module { background: var(--electric); border-radius: 16px; padding: 2rem 2.5rem; margin-top: 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.next-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+.next-title { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.next-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); color: var(--electric); padding: 0.75rem 1.5rem; border-radius: 8px; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s; }
+.next-btn:hover { transform: translateY(-2px); }
+
+footer { background: var(--ink); color: var(--white); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+.footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.1rem 1.5rem; } .nav-links { display: none; }
+  .module-hero { padding: 7rem 1.5rem 4rem; }
+  .module-layout { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0; }
+  .sidebar { display: none; }
+  .phase { grid-template-columns: 1fr; gap: 0.5rem; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>AI Leadership Hub</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="learning-hub.html" class="active">Learning Hub</a></li>
+    <li><a href="index.html#timeline">Career</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="module-hero">
+  <div class="module-breadcrumb">
+    <a href="learning-hub.html">Learning Hub</a><span>›</span>Module 04
+  </div>
+  <div class="module-tag">🏗 Data Platform Modernisation</div>
+  <h1>From legacy warehouse<br>to <span>cloud-native</span> —<br>without breaking trust.</h1>
+  <p class="module-hero-sub">Modernising your data platform is not a technical project — it's an organisational one. Here's how to do it without losing data quality, stakeholder trust, or your team's sanity.</p>
+  <div class="module-meta">
+    <div class="meta-item"><span class="meta-label">Reading time</span><span class="meta-val">~17 min</span></div>
+    <div class="meta-item"><span class="meta-label">Level</span><span class="meta-val">All levels</span></div>
+    <div class="meta-item"><span class="meta-label">Module</span><span class="meta-val">04 of 06</span></div>
+    <div class="meta-item"><span class="meta-label">By</span><span class="meta-val">Ana Rubio Herrera</span></div>
+  </div>
+</div>
+
+<div class="module-layout">
+  <aside class="sidebar">
+    <div class="sidebar-label">In this module</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s1" class="active">Why modernise?</a></li>
+      <li><a href="#s2">Platform landscape</a></li>
+      <li><a href="#s3">Migration playbook</a></li>
+      <li><a href="#s4">Stakeholder alignment</a></li>
+      <li><a href="#s5">Common pitfalls</a></li>
+      <li><a href="#s6">Real examples</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <a href="module-03.html" class="sidebar-back">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Previous: Agentic AI
+    </a>
+  </aside>
+
+  <article class="module-content">
+    <div class="prev-next">
+      <a href="module-03.html" class="prev-link">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Module 03: Agentic AI
+      </a>
+    </div>
+
+    <div class="content-section reveal" id="s1">
+      <div class="section-num">01</div>
+      <h2>Why modernise your data platform — and why now?</h2>
+      <p>Most organisations are running their analytics on infrastructure that was designed for a different era — on-premise data warehouses, legacy ETL pipelines, and BI tools that were state-of-the-art a decade ago. The problem is not that these systems don't work. It's that <strong>they can't support what organisations now need to do with data.</strong></p>
+      <p>Modern AI and analytics capabilities — real-time processing, machine learning at scale, generative AI integration, self-service analytics for non-technical users — require a different foundation. A legacy warehouse was not designed to serve a large language model. A batch ETL pipeline cannot support real-time decision-making. The platform becomes the constraint.</p>
+
+      <div class="callout">
+        <div class="callout-label">The real cost of inaction</div>
+        <p>Staying on legacy infrastructure is not free. The costs are hidden but real: <strong>slower time-to-insight, higher maintenance overhead, inability to adopt new AI capabilities, and data quality issues that compound over time.</strong> Every year of delay makes the eventual migration harder and more expensive.</p>
+      </div>
+
+      <p>The good news: cloud-native data platforms have matured significantly. Tools like Databricks, Snowflake, and the major cloud providers' data stacks offer capabilities that would have been unimaginable — or unaffordable — five years ago. The barrier is no longer technology. It's <strong>change management, stakeholder alignment, and migration execution.</strong></p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Legacy platforms are not just a technical debt problem — they're a strategic constraint that limits your AI and analytics ambitions.</li>
+          <li>The cost of inaction is real and growing. Every year of delay compounds the eventual migration complexity.</li>
+          <li>The main barriers to modernisation are organisational, not technical — plan accordingly.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s2">
+      <div class="section-num">02</div>
+      <h2>The modern data platform landscape</h2>
+      <p>The terminology in this space can be overwhelming. Here's a practical map of the key components of a modern data platform and what each one does.</p>
+
+      <table class="platform-table">
+        <thead>
+          <tr><th>Layer</th><th>What it does</th><th>Key tools</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ingestion</td>
+            <td>Moves data from source systems into the platform — batch or real-time</td>
+            <td>Fivetran, Airbyte, Kafka, Azure Data Factory</td>
+          </tr>
+          <tr>
+            <td>Storage</td>
+            <td>Stores raw and processed data at scale, cost-effectively</td>
+            <td>Azure Data Lake, S3, Google Cloud Storage, Delta Lake</td>
+          </tr>
+          <tr>
+            <td>Processing</td>
+            <td>Transforms, cleans, and enriches data for analysis</td>
+            <td>Databricks, Spark, dbt, Azure Synapse</td>
+          </tr>
+          <tr>
+            <td>Serving</td>
+            <td>Makes processed data available to analytics and AI tools</td>
+            <td>Snowflake, BigQuery, Redshift, Databricks SQL</td>
+          </tr>
+          <tr>
+            <td>Analytics &amp; BI</td>
+            <td>Enables exploration, dashboarding, and self-service reporting</td>
+            <td>Power BI, Tableau, Looker, Metabase</td>
+          </tr>
+          <tr>
+            <td>AI &amp; ML</td>
+            <td>Trains models, runs inference, serves predictions</td>
+            <td>Databricks MLflow, Azure ML, Vertex AI, SageMaker</td>
+          </tr>
+          <tr>
+            <td>Governance &amp; catalogue</td>
+            <td>Tracks data lineage, ownership, quality, and access</td>
+            <td>Unity Catalog, Purview, Collibra, Alation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>You don't need all of these from day one. <strong>The right architecture depends on your organisation's size, maturity, and use cases.</strong> The most common mistake is buying a comprehensive platform before you understand what you actually need to build on it.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Understand each layer before selecting tools — the layers are more important than the specific products.</li>
+          <li>Start with the layers that are most broken or most constraining. You don't need to modernise everything at once.</li>
+          <li>Governance and catalogue are often left to last — this is a mistake. Build them in from the start or you'll regret it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s3">
+      <div class="section-num">03</div>
+      <h2>The migration playbook — phase by phase</h2>
+      <p>There is no migration that goes exactly to plan. But there are migrations that are well-designed and ones that aren't. Here is the sequence that has worked across the programs I've led and supported.</p>
+
+      <div class="migration-phases">
+        <div class="phase">
+          <div class="phase-label">
+            <div class="phase-num">Phase 1</div>
+            <div class="phase-name">Discovery &amp; assessment</div>
+            <div class="phase-duration">4–8 weeks</div>
+          </div>
+          <div class="phase-desc">Map every data source, pipeline, and consumer in the current environment. Understand what exists, who uses it, how critical it is, and what the quality baseline is. <strong>Do not skip this phase.</strong> Migrations that skip discovery always encounter expensive surprises later.</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">
+            <div class="phase-num">Phase 2</div>
+            <div class="phase-name">Architecture design</div>
+            <div class="phase-duration">3–6 weeks</div>
+          </div>
+          <div class="phase-desc">Design the target state architecture. Define which tools will be used for each layer, how data will flow, what the governance model will be, and what the migration sequence will be. Get buy-in from technical leads and key stakeholders before proceeding.</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">
+            <div class="phase-num">Phase 3</div>
+            <div class="phase-name">Foundation build</div>
+            <div class="phase-duration">6–12 weeks</div>
+          </div>
+          <div class="phase-desc">Build the core infrastructure: storage, processing environment, governance framework, security model, and basic ingestion pipelines. This is the foundation everything else will run on — <strong>invest in quality here, it pays dividends for years.</strong></div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">
+            <div class="phase-num">Phase 4</div>
+            <div class="phase-name">Incremental migration</div>
+            <div class="phase-duration">3–12 months</div>
+          </div>
+          <div class="phase-desc">Migrate data assets in priority order — starting with the most valuable and least complex. Run new and old environments in parallel for each asset until the new environment is validated. Only decommission the old system when confidence is high.</div>
+        </div>
+        <div class="phase">
+          <div class="phase-label">
+            <div class="phase-num">Phase 5</div>
+            <div class="phase-name">Adoption &amp; optimisation</div>
+            <div class="phase-duration">Ongoing</div>
+          </div>
+          <div class="phase-desc">Train users, build champions, monitor usage and quality. Optimise costs and performance as usage patterns emerge. <strong>A migration is only successful when people are actually using the new platform</strong> — adoption is the measure of success, not go-live.</div>
+        </div>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Run old and new in parallel during migration — never cut over before the new environment is validated.</li>
+          <li>Migrate incrementally by priority, not all at once. Each successful migration builds confidence and momentum.</li>
+          <li>Adoption is the true measure of success. A platform nobody uses is a failed migration, regardless of technical quality.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s4">
+      <div class="section-num">04</div>
+      <h2>Stakeholder alignment — the make-or-break factor</h2>
+      <p>I've seen technically excellent migrations fail because of stakeholder misalignment — and I've seen imperfect migrations succeed because the people side was handled well. <strong>The technical work is the easier half.</strong></p>
+      <p>The stakeholders you need to align — and what each one cares about:</p>
+
+      <div class="callout">
+        <div class="callout-label">C-level / Board</div>
+        <p>They care about cost, risk, and strategic value. Frame the migration in terms of business outcomes — what decisions will be faster, what capabilities will be unlocked, what the cost of inaction is. <strong>Avoid technical detail at this level.</strong></p>
+      </div>
+      <div class="callout">
+        <div class="callout-label">Data consumers (analysts, business users)</div>
+        <p>They care about continuity — will their reports still work? Will their data still be there? <strong>Involve them early, communicate the migration timeline clearly, and never let their data disappear without warning.</strong> This group will make or break adoption.</p>
+      </div>
+      <div class="callout">
+        <div class="callout-label">IT &amp; security</div>
+        <p>They care about security, compliance, and operational stability. Engage them in architecture decisions early — not as a blocker, but as a partner. Their requirements are legitimate and will surface eventually. Better early than late.</p>
+      </div>
+      <div class="callout">
+        <div class="callout-label">Data engineering team</div>
+        <p>They are doing the work. They care about technical quality, realistic timelines, and not being set up to fail. <strong>Protect them from scope creep, give them clear priorities, and create space for them to do the work properly.</strong></p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Map your stakeholders before the migration starts and understand what each group cares about.</li>
+          <li>Never let data consumers discover that their reports have broken — proactive communication prevents most adoption problems.</li>
+          <li>The data engineering team is your execution engine. Protect their time and give them clear, stable priorities.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s5">
+      <div class="section-num">05</div>
+      <h2>The five pitfalls that sink migrations</h2>
+      <p>These are not hypothetical. Every one of these I have seen derail a real migration.</p>
+
+      <div class="pitfalls">
+        <div class="pitfall">
+          <div class="pitfall-icon">💸</div>
+          <div>
+            <div class="pitfall-title">Underestimating data quality debt</div>
+            <div class="pitfall-desc">The legacy system has years of accumulated quality issues that nobody has fully mapped. They surface during migration and cause delays. Always run a data quality assessment before committing to a migration timeline.</div>
+          </div>
+        </div>
+        <div class="pitfall">
+          <div class="pitfall-icon">🔒</div>
+          <div>
+            <div class="pitfall-title">Late security and compliance engagement</div>
+            <div class="pitfall-desc">Bringing in security and legal after the architecture is designed almost always results in expensive rework. Engage them in Phase 1 — their requirements will shape your design.</div>
+          </div>
+        </div>
+        <div class="pitfall">
+          <div class="pitfall-icon">📦</div>
+          <div>
+            <div class="pitfall-title">Migrating everything at once</div>
+            <div class="pitfall-desc">Big-bang migrations fail at a high rate. The complexity is unmanageable, the risk is concentrated, and when things go wrong there is no fallback. Always migrate incrementally.</div>
+          </div>
+        </div>
+        <div class="pitfall">
+          <div class="pitfall-icon">👥</div>
+          <div>
+            <div class="pitfall-title">No adoption plan</div>
+            <div class="pitfall-desc">Technical go-live is not the finish line. If users don't know how to use the new platform, don't trust it, or simply haven't been trained, the migration has failed regardless of technical quality.</div>
+          </div>
+        </div>
+        <div class="pitfall">
+          <div class="pitfall-icon">💰</div>
+          <div>
+            <div class="pitfall-title">Cloud cost shock</div>
+            <div class="pitfall-desc">Cloud platforms can be dramatically more expensive than expected if usage patterns are not managed. Build cost monitoring and governance into the platform from day one — not after the first bill arrives.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Run a data quality assessment before finalising your timeline — quality debt is the most common source of delays.</li>
+          <li>Incremental migration with parallel running is slower but far more reliable than big-bang cutover.</li>
+          <li>Build cost monitoring in from day one — cloud cost management is a discipline, not an afterthought.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s6">
+      <div class="section-num">06</div>
+      <h2>Real examples from the field</h2>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 United Nations — Databricks migration, Geneva</div>
+        <p>Supporting the UN's migration of its data warehouse to Databricks was a masterclass in the importance of patience and stakeholder management in a complex, multi-stakeholder environment. The technical migration itself was straightforward — the challenge was ensuring that dozens of teams across the organisation could continue to access their data during and after the transition, without disruption to critical reporting. <strong>The parallel running phase was longer than planned, but it was the right decision.</strong> Every team had time to validate their data in the new environment before the old system was decommissioned. No surprises, no broken reports, no lost trust.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 SDG Group — Insurance sector modernisation</div>
+        <p>Across insurance transformation programs, the data platform modernisation challenge was not just technical but regulatory: insurance data is heavily regulated, and every architectural decision needed to be defensible from a compliance perspective. The approach was to <strong>design the governance and security model first, then build the technical architecture around it</strong> — not the other way around. This added time upfront but eliminated the expensive rework that typically comes from retrofitting compliance onto a platform that wasn't designed for it.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 datalitiks — Building cloud-native from scratch</div>
+        <p>At datalitiks, the advantage was starting with a blank slate — no legacy to migrate, no existing users to manage. The lesson from this experience is that <strong>the decisions you make in the first 90 days of a data platform's life are disproportionately hard to undo later.</strong> We invested heavily upfront in data modelling, governance, and quality — choices that paid dividends as the platform scaled. Starting cloud-native is an opportunity to do it right from the beginning. Don't waste it by moving fast and cutting corners on the fundamentals.</p>
+      </div>
+
+      <div class="next-module">
+        <div>
+          <div class="next-label">Up next</div>
+          <div class="next-title">Module 05: MLOps in Practice</div>
+        </div>
+        <a href="learning-hub.html" class="next-btn">
+          Coming soon
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="footer-logo">AI Leadership Hub</div>
+  <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%';
+}, { passive: true });
+document.querySelectorAll('.content-section').forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' }).observe(s);
+});
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 }).observe(el);
+});
+</script>
+</body>
+</html>
