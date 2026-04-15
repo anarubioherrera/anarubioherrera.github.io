@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 01: GenAI Foundations — AI Leadership Hub</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16; --lime-dark: #4D7C0F;
+  --white: #FAFAF9; --off: #F5F5F4; --ink: #1C1917; --mid: #78716C; --border: #E7E5E4;
+  --f-display: 'Syne', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--f-display); font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--electric); animation: blink 2.5s ease-in-out infinite; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-cta {
+  background: var(--electric); color: #fff; padding: 0.55rem 1.35rem;
+  font-family: var(--f-display); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #4338CA; }
+
+/* HERO */
+.module-hero {
+  padding: 9rem 3rem 5rem;
+  background: var(--ink); color: var(--white);
+  position: relative; overflow: hidden;
+}
+.module-hero::after {
+  content: '01';
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--f-display); font-size: clamp(12rem, 22vw, 22rem); font-weight: 800;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05);
+  pointer-events: none; user-select: none; line-height: 1;
+}
+.module-breadcrumb {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--f-display); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(250,250,249,0.4); margin-bottom: 1.5rem;
+}
+.module-breadcrumb a { color: var(--electric-light); transition: color 0.2s; }
+.module-breadcrumb a:hover { color: var(--white); }
+.module-breadcrumb span { opacity: 0.3; }
+.module-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(79,70,229,0.25); color: var(--electric-light);
+  padding: 0.35rem 0.9rem; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600; margin-bottom: 1.5rem;
+}
+.module-hero h1 {
+  font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+  max-width: 700px; margin-bottom: 1.5rem; position: relative;
+}
+.module-hero h1 span { color: var(--lime); }
+.module-hero-sub {
+  font-size: 1.05rem; color: rgba(250,250,249,0.6);
+  max-width: 580px; line-height: 1.75; margin-bottom: 3rem; position: relative;
+}
+.module-meta {
+  display: flex; gap: 2rem; flex-wrap: wrap; position: relative;
+}
+.meta-item {
+  display: flex; flex-direction: column; gap: 0.15rem;
+}
+.meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.35); }
+.meta-val { font-size: 0.9rem; font-weight: 500; color: rgba(250,250,249,0.85); }
+
+/* PROGRESS BAR */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; background: var(--lime);
+  z-index: 200; transition: width 0.1s; width: 0%;
+}
+
+/* LAYOUT */
+.module-layout {
+  display: grid; grid-template-columns: 220px 1fr;
+  max-width: 1100px; margin: 0 auto;
+  padding: 4rem 3rem; gap: 5rem; align-items: start;
+}
+
+/* SIDEBAR */
+.sidebar { position: sticky; top: 6rem; }
+.sidebar-label {
+  font-family: var(--f-display); font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid);
+  margin-bottom: 1rem;
+}
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+.sidebar-nav a {
+  display: block; padding: 0.5rem 0.75rem;
+  font-size: 0.82rem; color: var(--mid); border-radius: 6px;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  line-height: 1.4;
+}
+.sidebar-nav a:hover { color: var(--ink); background: var(--off); }
+.sidebar-nav a.active { color: var(--electric); border-left-color: var(--electric); background: #EEF2FF; font-weight: 600; }
+.sidebar-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+.sidebar-back {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.75rem; color: var(--mid); padding: 0.4rem 0;
+  transition: color 0.2s;
+}
+.sidebar-back:hover { color: var(--electric); }
+
+/* CONTENT */
+.module-content { max-width: 680px; }
+.content-section { margin-bottom: 5rem; scroll-margin-top: 7rem; }
+.section-num {
+  font-family: var(--f-display); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--electric);
+  margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.section-num::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
+.content-section h2 {
+  font-family: var(--f-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+}
+.content-section p {
+  color: var(--mid); line-height: 1.85; margin-bottom: 1.25rem; font-size: 1rem;
+}
+.content-section p strong { color: var(--ink); font-weight: 600; }
+
+/* CALLOUT */
+.callout {
+  background: #EEF2FF; border-left: 3px solid var(--electric);
+  border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0;
+}
+.callout-label {
+  font-family: var(--f-display); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric);
+  margin-bottom: 0.5rem;
+}
+.callout p { color: #3730A3; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+
+/* REAL WORLD BOX */
+.real-world {
+  background: var(--ink); border-radius: 16px;
+  padding: 1.75rem 2rem; margin: 2rem 0; color: var(--white);
+}
+.real-world-label {
+  font-family: var(--f-display); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime);
+  margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.real-world p { color: rgba(250,250,249,0.7); font-size: 0.95rem; line-height: 1.75; margin-bottom: 0; }
+.real-world p strong { color: var(--white); }
+
+/* COMPARISON TABLE */
+.compare-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; }
+.compare-table th {
+  font-family: var(--f-display); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.75rem 1rem; text-align: left; background: var(--off);
+  border-bottom: 2px solid var(--border);
+}
+.compare-table th:first-child { border-radius: 8px 0 0 0; }
+.compare-table th:last-child { border-radius: 0 8px 0 0; }
+.compare-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); color: var(--mid); vertical-align: top; }
+.compare-table td:first-child { font-weight: 600; color: var(--ink); }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: var(--off); }
+
+/* TAKEAWAYS */
+.takeaways {
+  background: var(--off); border-radius: 16px;
+  padding: 1.75rem 2rem; margin: 2.5rem 0;
+}
+.takeaways-label {
+  font-family: var(--f-display); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime-dark);
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+}
+.takeaways-label::before { content: '✦'; font-size: 0.6rem; color: var(--lime); }
+.takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.takeaway-list li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  font-size: 0.92rem; color: var(--ink); line-height: 1.6;
+}
+.takeaway-list li::before {
+  content: '→'; color: var(--electric); font-weight: 700;
+  flex-shrink: 0; margin-top: 0.05rem;
+}
+
+/* EXAMPLE GRID */
+.example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.example-card {
+  border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+.example-card:hover { border-color: var(--electric); }
+.example-card-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.example-card-title { font-family: var(--f-display); font-size: 0.88rem; font-weight: 700; margin-bottom: 0.4rem; }
+.example-card-text { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+/* NEXT MODULE */
+.next-module {
+  background: var(--electric); border-radius: 16px;
+  padding: 2rem 2.5rem; margin-top: 4rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  flex-wrap: wrap;
+}
+.next-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+.next-title { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.next-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--white); color: var(--electric);
+  padding: 0.75rem 1.5rem; border-radius: 8px;
+  font-family: var(--f-display); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+  transition: transform 0.2s;
+}
+.next-btn:hover { transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: var(--white); padding: 2rem 3rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  margin-top: 4rem;
+}
+.footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.1rem 1.5rem; }
+  .nav-links { display: none; }
+  .module-hero { padding: 7rem 1.5rem 4rem; }
+  .module-layout { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0; }
+  .sidebar { display: none; }
+  .example-grid { grid-template-columns: 1fr; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>AI Leadership Hub</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="learning-hub.html" class="active">Learning Hub</a></li>
+    <li><a href="index.html#timeline">Career</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="module-hero">
+  <div class="module-breadcrumb">
+    <a href="learning-hub.html">Learning Hub</a>
+    <span>›</span>
+    Module 01
+  </div>
+  <div class="module-tag">⚡ GenAI Foundations</div>
+  <h1>What GenAI actually is —<br>and why it <span>changes everything.</span></h1>
+  <p class="module-hero-sub">A practical, jargon-free guide to generative AI for leaders, managers, and data professionals who want to use it intelligently — not just talk about it.</p>
+  <div class="module-meta">
+    <div class="meta-item"><span class="meta-label">Reading time</span><span class="meta-val">~15 min</span></div>
+    <div class="meta-item"><span class="meta-label">Level</span><span class="meta-val">All levels</span></div>
+    <div class="meta-item"><span class="meta-label">Module</span><span class="meta-val">01 of 06</span></div>
+    <div class="meta-item"><span class="meta-label">By</span><span class="meta-val">Ana Rubio Herrera</span></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="module-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">In this module</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s1" class="active">What is GenAI?</a></li>
+      <li><a href="#s2">GenAI vs classical ML</a></li>
+      <li><a href="#s3">Where the value is</a></li>
+      <li><a href="#s4">Real examples</a></li>
+      <li><a href="#s5">What it can't do</a></li>
+      <li><a href="#s6">How to start</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <a href="learning-hub.html" class="sidebar-back">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      All modules
+    </a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <article class="module-content">
+
+    <!-- SECTION 1 -->
+    <div class="content-section reveal" id="s1">
+      <div class="section-num">01</div>
+      <h2>What is Generative AI — really?</h2>
+      <p>There's a lot of noise around Generative AI. The term gets used to describe everything from a chatbot answering customer service emails to systems that can write code, generate images, draft legal contracts, or summarise a 200-page report in seconds.</p>
+      <p>So let's cut through the noise with a simple definition: <strong>Generative AI is a type of artificial intelligence that creates new content — text, images, code, audio, video — by learning patterns from large amounts of existing data.</strong></p>
+      <p>The key word is "generates." Unlike traditional software that follows fixed rules, or even classical machine learning that predicts or classifies, GenAI produces something new each time. It doesn't retrieve stored answers — it constructs them.</p>
+
+      <div class="callout">
+        <div class="callout-label">Think of it this way</div>
+        <p>A search engine finds information that already exists. A recommendation algorithm predicts what you'll like. A generative AI model <strong>creates something that didn't exist before</strong> — a draft, a summary, a piece of code — based on what it has learned from billions of examples.</p>
+      </div>
+
+      <p>The models behind this — like GPT-4, Claude, or Gemini — are called <strong>Large Language Models (LLMs)</strong>. They're trained on vast amounts of text from the internet, books, and other sources, and they've developed a remarkable ability to understand context, follow instructions, and generate coherent, useful outputs.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>GenAI doesn't retrieve — it generates. This is what makes it fundamentally different from search or traditional analytics.</li>
+          <li>The output quality depends heavily on the quality of your input (the "prompt") and the context you provide.</li>
+          <li>LLMs are general-purpose — the same model that writes marketing copy can also summarise financial reports or explain a technical concept.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="content-section reveal" id="s2">
+      <div class="section-num">02</div>
+      <h2>GenAI vs classical ML — what's the difference?</h2>
+      <p>One of the most common points of confusion I encounter in organisations is conflating Generative AI with "AI" or "machine learning" in general. They're related, but meaningfully different — and understanding the difference matters for how you deploy them.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Classical ML</th>
+            <th>Generative AI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>What it does</td>
+            <td>Predicts, classifies, detects patterns</td>
+            <td>Creates new content from prompts</td>
+          </tr>
+          <tr>
+            <td>Training data needed</td>
+            <td>Labelled datasets, specific to task</td>
+            <td>Massive general datasets (pre-trained)</td>
+          </tr>
+          <tr>
+            <td>Typical use cases</td>
+            <td>Fraud detection, churn prediction, image classification</td>
+            <td>Drafting, summarising, coding, Q&amp;A</td>
+          </tr>
+          <tr>
+            <td>Time to value</td>
+            <td>Weeks to months (model training)</td>
+            <td>Hours to days (prompt engineering)</td>
+          </tr>
+          <tr>
+            <td>Expertise required</td>
+            <td>Data scientists, MLOps engineers</td>
+            <td>Any skilled knowledge worker</td>
+          </tr>
+          <tr>
+            <td>Output</td>
+            <td>A number, label, or score</td>
+            <td>Text, code, image, audio, video</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The practical implication: <strong>classical ML requires significant technical investment upfront</strong> — data preparation, model training, infrastructure. GenAI, by contrast, can deliver value in days through prompt engineering and workflow integration, without needing a data science team.</p>
+      <p>This doesn't mean GenAI replaces classical ML. For high-stakes predictions — credit risk, insurance pricing, fraud detection — you still want purpose-built models with clear explainability. GenAI excels at the knowledge-work layer: communication, documentation, analysis, and synthesis.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Classical ML and GenAI solve different problems — use both strategically, not one instead of the other.</li>
+          <li>GenAI's low barrier to entry is its superpower: any knowledge worker can start extracting value almost immediately.</li>
+          <li>For regulated decisions (pricing, risk, compliance), stick with explainable classical models. Use GenAI for the surrounding workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="content-section reveal" id="s3">
+      <div class="section-num">03</div>
+      <h2>Where does GenAI actually create business value?</h2>
+      <p>Let's be concrete. After integrating GenAI tools systematically across my own work — at SDG Group, at datalitiks, and in my own workflows — I've found that value concentrates in five areas:</p>
+
+      <div class="example-grid">
+        <div class="example-card">
+          <div class="example-card-icon">✍️</div>
+          <div class="example-card-title">Content &amp; communication</div>
+          <div class="example-card-text">Drafting reports, presentations, emails, documentation, status updates. Tasks that used to take hours now take minutes.</div>
+        </div>
+        <div class="example-card">
+          <div class="example-card-icon">🔍</div>
+          <div class="example-card-title">Research &amp; synthesis</div>
+          <div class="example-card-text">Summarising long documents, extracting key points, synthesising information from multiple sources into a coherent view.</div>
+        </div>
+        <div class="example-card">
+          <div class="example-card-icon">💻</div>
+          <div class="example-card-title">Code &amp; data work</div>
+          <div class="example-card-text">Writing SQL queries, Python scripts, data transformations. A non-developer can now produce working code with the right prompts.</div>
+        </div>
+        <div class="example-card">
+          <div class="example-card-icon">🧠</div>
+          <div class="example-card-title">Thinking &amp; analysis</div>
+          <div class="example-card-text">Structuring complex problems, stress-testing arguments, generating options, playing devil's advocate on your own proposals.</div>
+        </div>
+        <div class="example-card">
+          <div class="example-card-icon">🔄</div>
+          <div class="example-card-title">Workflow automation</div>
+          <div class="example-card-text">Connecting GenAI to existing tools and data sources to automate repetitive knowledge tasks at scale (see Module 03: Agentic AI).</div>
+        </div>
+        <div class="example-card">
+          <div class="example-card-icon">🎓</div>
+          <div class="example-card-title">Learning &amp; onboarding</div>
+          <div class="example-card-text">Explaining complex topics, answering questions, creating training materials — GenAI as an always-available expert colleague.</div>
+        </div>
+      </div>
+
+      <p>The common thread across all of these: <strong>GenAI compresses time.</strong> Tasks that required specialist knowledge or significant time investment become accessible to anyone who can articulate what they need clearly.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Start by auditing your team's most time-consuming knowledge tasks — those are your highest-value GenAI opportunities.</li>
+          <li>The biggest wins are often unglamorous: drafting, summarising, reformatting, translating between formats.</li>
+          <li>GenAI doesn't replace expertise — it amplifies it. The person who knows what good looks like will always get better outputs.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="content-section reveal" id="s4">
+      <div class="section-num">04</div>
+      <h2>Real examples from real organisations</h2>
+      <p>Theory is useful. But what does this look like in practice? Here are three examples from my own experience.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 SDG Group — Insurance sector</div>
+        <p>Across a large-scale data transformation program spanning four countries, I systematically integrated GenAI into project workflows: executive presentations, technical documentation, stakeholder status reports, and meeting preparation. The result was a <strong>~40% reduction in time spent on individual tasks</strong> — freeing the team to focus on the advisory and strategic work that actually required human judgment. The key was not using GenAI occasionally, but embedding it into every repeatable workflow deliberately.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 datalitiks — ESG data startup</div>
+        <p>When I founded datalitiks, I integrated ChatGPT from the very first week — not as an experiment, but as a core part of how we worked. We used it to accelerate platform development, produce content, and structure complex ESG frameworks. The result: <strong>~30% faster development timelines and ~40% lower content production costs</strong>. A lean team was able to deliver what would normally have required significantly more headcount. This was in 2022 — before most organisations had even started thinking about GenAI seriously.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 United Nations — Geneva</div>
+        <p>In a complex international organisation with strict information governance requirements, the opportunity was different: using GenAI carefully for internal knowledge synthesis and documentation, always with a human-in-the-loop. The lesson here was that <strong>context and governance matter as much as capability</strong>. GenAI in a regulated, international environment requires clear policies about what data goes in, who reviews the output, and how decisions are documented.</p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>The organisations getting the most value from GenAI are those that embedded it systematically — not as a one-off experiment.</li>
+          <li>Early adoption matters: the learning curve compounds. Teams that started in 2022–23 are now operating at a fundamentally different level.</li>
+          <li>Context shapes strategy: what works in a startup moves faster but differently than what works in an international organisation with governance requirements.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="content-section reveal" id="s5">
+      <div class="section-num">05</div>
+      <h2>What GenAI can't do — and where it goes wrong</h2>
+      <p>Intellectual honesty matters here. GenAI is powerful, but it has real limitations that leaders need to understand — especially before deploying it in high-stakes contexts.</p>
+
+      <div class="callout">
+        <div class="callout-label">Hallucination</div>
+        <p>GenAI models can confidently state things that are factually wrong. They don't "know" things — they generate plausible-sounding text. <strong>Always verify outputs that contain specific facts, figures, or citations.</strong></p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">No real-time knowledge</div>
+        <p>Most models have a training cutoff date. They don't know what happened last week. For current information, you need to either provide the context yourself or use tools with web access.</p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Data privacy risk</div>
+        <p>Whatever you put into a GenAI prompt may be used for model training (depending on the provider and settings). <strong>Never input confidential client data, personal data, or proprietary information without checking the data processing terms.</strong></p>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">The "good enough" trap</div>
+        <p>GenAI outputs can sound authoritative and polished even when they're mediocre. Without domain expertise, it's hard to spot what's wrong. The human reviewer is not optional — it's the entire quality control system.</p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Treat GenAI output as a first draft, not a final answer — always review before using in any professional context.</li>
+          <li>Establish clear data handling policies before deploying GenAI across your team.</li>
+          <li>The quality of your GenAI usage scales with the expertise of the person using it — invest in training, not just tools.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="content-section reveal" id="s6">
+      <div class="section-num">06</div>
+      <h2>How to start — this week</h2>
+      <p>The best way to understand GenAI is to use it. Here's a practical starting point that I'd recommend to anyone, regardless of role or technical background.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Action plan — this week</div>
+        <ul class="takeaway-list">
+          <li><strong>Pick one recurring task</strong> that takes you 30–60 minutes and involves writing or synthesising information. Try doing it with ChatGPT or Claude and compare the result.</li>
+          <li><strong>Practise writing clear prompts.</strong> The clearer and more specific your instruction, the better the output. Include context, format, audience, and any constraints.</li>
+          <li><strong>Keep a log</strong> of every task where you use GenAI and how much time it saves. After two weeks, you'll have your own business case.</li>
+          <li><strong>Never skip the review.</strong> Develop the habit of treating every GenAI output as a draft that needs your expertise to finalise.</li>
+          <li><strong>Share what works</strong> with your team. GenAI adoption compounds when knowledge spreads — the team that learns together accelerates together.</li>
+        </ul>
+      </div>
+
+      <p>GenAI is not a magic button. But for those willing to invest a few weeks in learning how to use it well, it genuinely changes the pace at which you can work. The competitive advantage isn't in having access to the tool — everyone has that. It's in knowing how to use it strategically and systematically.</p>
+      <p>That's what the rest of this Learning Hub is about.</p>
+
+      <!-- NEXT MODULE -->
+      <div class="next-module">
+        <div>
+          <div class="next-label">Up next</div>
+          <div class="next-title">Module 02: AI Governance &amp; Strategy</div>
+        </div>
+        <a href="learning-hub.html" class="next-btn">
+          Coming soon
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="footer-logo">AI Leadership Hub</div>
+  <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
+</footer>
+
+<script>
+// Progress bar
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progress.style.width = pct + '%';
+}, { passive: true });
+
+// Sidebar active state
+const sections = document.querySelectorAll('.content-section');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// Reveal on scroll
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+</body>
+</html>
