@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 05: MLOps in Practice — AI Leadership Hub</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16; --lime-dark: #4D7C0F;
+  --white: #FAFAF9; --off: #F5F5F4; --ink: #1C1917; --mid: #78716C; --border: #E7E5E4;
+  --f-display: 'Syne', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 0.6rem; }
+.nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--electric); animation: blink 2.5s ease-in-out infinite; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-cta { background: var(--electric); color: #fff; padding: 0.55rem 1.35rem; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px; transition: background 0.2s; }
+.nav-cta:hover { background: #4338CA; }
+
+.module-hero { padding: 9rem 3rem 5rem; background: var(--ink); color: var(--white); position: relative; overflow: hidden; }
+.module-hero::after { content: '05'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: var(--f-display); font-size: clamp(12rem, 22vw, 22rem); font-weight: 800; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; user-select: none; line-height: 1; }
+.module-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.4); margin-bottom: 1.5rem; }
+.module-breadcrumb a { color: var(--electric-light); transition: color 0.2s; }
+.module-breadcrumb span { opacity: 0.3; }
+.module-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(79,70,229,0.25); color: var(--electric-light); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 600; margin-bottom: 1.5rem; }
+.module-hero h1 { font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; max-width: 700px; margin-bottom: 1.5rem; position: relative; }
+.module-hero h1 span { color: var(--lime); }
+.module-hero-sub { font-size: 1.05rem; color: rgba(250,250,249,0.6); max-width: 580px; line-height: 1.75; margin-bottom: 3rem; position: relative; }
+.module-meta { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; }
+.meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+.meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.35); }
+.meta-val { font-size: 0.9rem; font-weight: 500; color: rgba(250,250,249,0.85); }
+
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--lime); z-index: 200; width: 0%; }
+.module-layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; gap: 5rem; align-items: start; }
+.sidebar { position: sticky; top: 6rem; }
+.sidebar-label { font-family: var(--f-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; }
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+.sidebar-nav a { display: block; padding: 0.5rem 0.75rem; font-size: 0.82rem; color: var(--mid); border-radius: 6px; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s, background 0.2s; line-height: 1.4; }
+.sidebar-nav a:hover { color: var(--ink); background: var(--off); }
+.sidebar-nav a.active { color: var(--electric); border-left-color: var(--electric); background: #EEF2FF; font-weight: 600; }
+.sidebar-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+.sidebar-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--mid); padding: 0.4rem 0; transition: color 0.2s; }
+.sidebar-back:hover { color: var(--electric); }
+
+.module-content { max-width: 680px; }
+.content-section { margin-bottom: 5rem; scroll-margin-top: 7rem; }
+.section-num { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-num::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
+.content-section h2 { font-family: var(--f-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+.content-section p { color: var(--mid); line-height: 1.85; margin-bottom: 1.25rem; font-size: 1rem; }
+.content-section p strong { color: var(--ink); font-weight: 600; }
+
+.callout { background: #EEF2FF; border-left: 3px solid var(--electric); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.5rem; }
+.callout p { color: #3730A3; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+.callout-warning { background: #FFFBEB; border-left: 3px solid #F59E0B; border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-warning .callout-label { color: #92400E; }
+.callout-warning p { color: #78350F; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+
+.real-world { background: var(--ink); border-radius: 16px; padding: 1.75rem 2rem; margin: 2rem 0; color: var(--white); }
+.real-world-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.75rem; }
+.real-world p { color: rgba(250,250,249,0.7); font-size: 0.95rem; line-height: 1.75; margin-bottom: 0; }
+.real-world p strong { color: var(--white); }
+
+.takeaways { background: var(--off); border-radius: 16px; padding: 1.75rem 2rem; margin: 2.5rem 0; }
+.takeaways-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.takeaways-label::before { content: '✦'; font-size: 0.6rem; color: var(--lime); }
+.takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.takeaway-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+.takeaway-list li::before { content: '→'; color: var(--electric); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+
+.mlops-lifecycle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+.lifecycle-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+.lifecycle-card:hover { border-color: var(--electric); transform: translateY(-3px); }
+.lifecycle-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+.lifecycle-title { font-family: var(--f-display); font-size: 0.88rem; font-weight: 700; margin-bottom: 0.4rem; }
+.lifecycle-desc { font-size: 0.78rem; color: var(--mid); line-height: 1.6; }
+
+.gap-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+.gap-table th { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.75rem 1rem; text-align: left; background: var(--off); border-bottom: 2px solid var(--border); }
+.gap-table th:first-child { border-radius: 8px 0 0 0; }
+.gap-table th:last-child { border-radius: 0 8px 0 0; }
+.gap-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); color: var(--mid); vertical-align: top; line-height: 1.5; }
+.gap-table td:first-child { font-weight: 600; color: var(--ink); }
+.gap-table tr:last-child td { border-bottom: none; }
+.gap-table tr:hover td { background: var(--off); }
+
+.maturity-levels { display: flex; flex-direction: column; gap: 0.75rem; margin: 2rem 0; }
+.maturity-level { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; padding: 1.1rem 1.25rem; border: 1.5px solid var(--border); border-radius: 12px; align-items: start; transition: border-color 0.2s; }
+.maturity-level:hover { border-color: var(--electric); }
+.maturity-badge { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.6rem; border-radius: 6px; text-align: center; }
+.badge-0 { background: #FEE2E2; color: #B91C1C; }
+.badge-1 { background: #FEF3C7; color: #92400E; }
+.badge-2 { background: #EEF2FF; color: var(--electric); }
+.badge-3 { background: #DCFCE7; color: #166534; }
+.maturity-content {}
+.maturity-title { font-family: var(--f-display); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; }
+.maturity-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+.monitoring-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.monitoring-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; }
+.monitoring-card:hover { border-color: var(--electric); }
+.monitoring-icon { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.monitoring-title { font-family: var(--f-display); font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; }
+.monitoring-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+.prev-next { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.prev-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; transition: border-color 0.2s, color 0.2s; }
+.prev-link:hover { border-color: var(--ink); color: var(--ink); }
+.next-module { background: var(--electric); border-radius: 16px; padding: 2rem 2.5rem; margin-top: 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.next-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+.next-title { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.next-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); color: var(--electric); padding: 0.75rem 1.5rem; border-radius: 8px; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s; }
+.next-btn:hover { transform: translateY(-2px); }
+
+footer { background: var(--ink); color: var(--white); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+.footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.1rem 1.5rem; } .nav-links { display: none; }
+  .module-hero { padding: 7rem 1.5rem 4rem; }
+  .module-layout { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0; }
+  .sidebar { display: none; }
+  .mlops-lifecycle { grid-template-columns: 1fr 1fr; }
+  .monitoring-grid { grid-template-columns: 1fr; }
+  .maturity-level { grid-template-columns: 1fr; gap: 0.5rem; }
+  footer { padding: 1.5rem; }
+}
+@media (max-width: 500px) {
+  .mlops-lifecycle { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>AI Leadership Hub</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="learning-hub.html" class="active">Learning Hub</a></li>
+    <li><a href="index.html#timeline">Career</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="module-hero">
+  <div class="module-breadcrumb">
+    <a href="learning-hub.html">Learning Hub</a><span>›</span>Module 05
+  </div>
+  <div class="module-tag">⚙️ MLOps in Practice</div>
+  <h1>Getting ML models<br>out of notebooks and<br>into <span>production.</span></h1>
+  <p class="module-hero-sub">MLOps is not a technical discipline — it's an organisational one. The gap between a working model and a model that delivers value in production is wider than most organisations expect.</p>
+  <div class="module-meta">
+    <div class="meta-item"><span class="meta-label">Reading time</span><span class="meta-val">~16 min</span></div>
+    <div class="meta-item"><span class="meta-label">Level</span><span class="meta-val">All levels</span></div>
+    <div class="meta-item"><span class="meta-label">Module</span><span class="meta-val">05 of 06</span></div>
+    <div class="meta-item"><span class="meta-label">By</span><span class="meta-val">Ana Rubio Herrera</span></div>
+  </div>
+</div>
+
+<div class="module-layout">
+  <aside class="sidebar">
+    <div class="sidebar-label">In this module</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s1" class="active">What is MLOps?</a></li>
+      <li><a href="#s2">The ML lifecycle</a></li>
+      <li><a href="#s3">The data–science gap</a></li>
+      <li><a href="#s4">Maturity levels</a></li>
+      <li><a href="#s5">Monitoring in production</a></li>
+      <li><a href="#s6">Real examples</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <a href="module-04.html" class="sidebar-back">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Previous: Data Platform
+    </a>
+  </aside>
+
+  <article class="module-content">
+    <div class="prev-next">
+      <a href="module-04.html" class="prev-link">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Module 04: Data Platform
+      </a>
+    </div>
+
+    <div class="content-section reveal" id="s1">
+      <div class="section-num">01</div>
+      <h2>What is MLOps — and why does it matter?</h2>
+      <p>Every year, organisations invest significant resources in building machine learning models. Data scientists spend months developing models that achieve impressive accuracy in controlled conditions. And then — far too often — those models sit in notebooks, never making it into production. Or they get deployed once and never maintained, drifting silently until they become unreliable.</p>
+      <p><strong>MLOps is the discipline of operationalising machine learning</strong> — the practices, tools, and culture required to deploy, monitor, and maintain ML models in production reliably and at scale. It borrows from software engineering (DevOps) and applies those principles to the unique challenges of machine learning.</p>
+
+      <div class="callout">
+        <div class="callout-label">The core problem MLOps solves</div>
+        <p>A machine learning model is not like a piece of software. Software behaves consistently as long as the code doesn't change. <strong>A model's performance degrades over time as the real world drifts away from the data it was trained on.</strong> MLOps provides the systems to detect, respond to, and prevent this degradation.</p>
+      </div>
+
+      <p>MLOps is also fundamentally an organisational challenge. The gap between data science teams (who build models) and engineering teams (who deploy and maintain systems) is at the root of most ML production failures. MLOps is as much about bridging that gap as it is about tooling.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>A model in a notebook creates no business value. Only models in production — reliably serving predictions — deliver ROI.</li>
+          <li>Models degrade over time. Without monitoring and retraining, a model that worked well at launch will quietly become a liability.</li>
+          <li>MLOps is 50% tooling, 50% culture. The organisational gap between data science and engineering is the hardest part to close.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s2">
+      <div class="section-num">02</div>
+      <h2>The ML lifecycle — end to end</h2>
+      <p>Understanding the full lifecycle of a machine learning model helps you identify where your organisation's bottlenecks are — and where MLOps practices will have the most impact.</p>
+
+      <div class="mlops-lifecycle">
+        <div class="lifecycle-card">
+          <div class="lifecycle-icon">📦</div>
+          <div class="lifecycle-title">Data preparation</div>
+          <div class="lifecycle-desc">Collecting, cleaning, and transforming data into training-ready format. The most time-consuming phase — typically 60–80% of a data scientist's time.</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-icon">🧪</div>
+          <div class="lifecycle-title">Experimentation</div>
+          <div class="lifecycle-desc">Training and evaluating candidate models. Tracking experiments — parameters, metrics, artefacts — so results are reproducible and comparable.</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-icon">✅</div>
+          <div class="lifecycle-title">Validation</div>
+          <div class="lifecycle-desc">Testing model performance on held-out data, checking for bias, validating against business acceptance criteria before deployment.</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-icon">🚀</div>
+          <div class="lifecycle-title">Deployment</div>
+          <div class="lifecycle-desc">Packaging the model and making it available as a service — via API, batch job, or embedded in an application. This is where most organisations struggle.</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-icon">📊</div>
+          <div class="lifecycle-title">Monitoring</div>
+          <div class="lifecycle-desc">Tracking model performance, data drift, and system health in production. The ongoing work that keeps models reliable after launch.</div>
+        </div>
+        <div class="lifecycle-card">
+          <div class="lifecycle-icon">🔄</div>
+          <div class="lifecycle-title">Retraining</div>
+          <div class="lifecycle-desc">Updating the model with new data when performance degrades. Automated retraining pipelines are the mark of a mature MLOps practice.</div>
+        </div>
+      </div>
+
+      <p>Most organisations have reasonable practices for the first two or three stages. <strong>The bottleneck is almost always at deployment and beyond</strong> — getting models into production reliably, and keeping them there.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Map where your organisation spends its time across the lifecycle — the bottleneck is usually at deployment or monitoring, not experimentation.</li>
+          <li>Experiment tracking is foundational — if you can't reproduce a result, you can't build on it reliably.</li>
+          <li>Retraining is not optional. Build it into the plan from the start, not as an afterthought when performance starts to drop.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s3">
+      <div class="section-num">03</div>
+      <h2>The data science — engineering gap</h2>
+      <p>The most common root cause of MLOps failure is not tooling — it's the organisational gap between the people who build models and the people who deploy and maintain systems. Understanding this gap is the first step to closing it.</p>
+
+      <table class="gap-table">
+        <thead>
+          <tr><th>Dimension</th><th>Data science mindset</th><th>Engineering mindset</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Primary goal</td><td>Maximise model accuracy</td><td>Ensure system reliability</td></tr>
+          <tr><td>Time horizon</td><td>Experiment cycle (days/weeks)</td><td>Production lifecycle (months/years)</td></tr>
+          <tr><td>Success metric</td><td>AUC, F1, RMSE</td><td>Uptime, latency, cost</td></tr>
+          <tr><td>Code style</td><td>Exploratory notebooks</td><td>Production-grade, tested, versioned</td></tr>
+          <tr><td>Failure mode</td><td>Model doesn't converge</td><td>System goes down at 2am</td></tr>
+          <tr><td>Relationship to change</td><td>Frequent experimentation</td><td>Controlled, tested releases</td></tr>
+        </tbody>
+      </table>
+
+      <p>Neither mindset is wrong — they're both essential. The problem is when they operate in isolation. <strong>MLOps is what happens when you force these two worlds to work together, with shared tools, shared standards, and shared accountability for production outcomes.</strong></p>
+
+      <div class="callout-warning">
+        <div class="callout-label">⚠ The most expensive gap</div>
+        <p>Data scientists build models in environments that don't reflect production — different data, different infrastructure, different dependencies. When the model is handed to engineering for deployment, it breaks. <strong>Closing this gap requires shared environments and standards from the start, not just at handoff.</strong></p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>The data science–engineering gap is organisational, not just technical. Address it with shared goals, shared tools, and joint ownership of production outcomes.</li>
+          <li>Data scientists need to understand production constraints. Engineers need to understand model behaviour. Create forums for both.</li>
+          <li>Shared development environments between data science and engineering eliminate the most common source of deployment failures.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s4">
+      <div class="section-num">04</div>
+      <h2>MLOps maturity — where is your organisation?</h2>
+      <p>MLOps capability exists on a spectrum. Understanding where your organisation sits today is the starting point for knowing what to invest in next.</p>
+
+      <div class="maturity-levels">
+        <div class="maturity-level">
+          <div class="maturity-badge badge-0">Level 0</div>
+          <div class="maturity-content">
+            <div class="maturity-title">Manual everything</div>
+            <div class="maturity-desc">Models built in notebooks, deployed manually, not monitored. Retraining happens when someone notices things have gone wrong. Most organisations start here.</div>
+          </div>
+        </div>
+        <div class="maturity-level">
+          <div class="maturity-badge badge-1">Level 1</div>
+          <div class="maturity-content">
+            <div class="maturity-title">Automated training pipelines</div>
+            <div class="maturity-desc">Training is automated and reproducible. Experiment tracking is in place. Deployment is still manual or semi-manual. Basic monitoring exists but is not actionable.</div>
+          </div>
+        </div>
+        <div class="maturity-level">
+          <div class="maturity-badge badge-2">Level 2</div>
+          <div class="maturity-content">
+            <div class="maturity-title">Automated deployment</div>
+            <div class="maturity-desc">CI/CD pipelines for model deployment. Model registry in use. Monitoring covers key performance metrics. Retraining is triggered manually but the process is defined.</div>
+          </div>
+        </div>
+        <div class="maturity-level">
+          <div class="maturity-badge badge-3">Level 3</div>
+          <div class="maturity-content">
+            <div class="maturity-title">Full automation &amp; self-healing</div>
+            <div class="maturity-desc">Automated retraining triggered by drift detection. A/B testing and canary deployments in place. Full observability across the ML lifecycle. Few organisations reach this level.</div>
+          </div>
+        </div>
+      </div>
+
+      <p>Most organisations operating ML in production sit at Level 1 or Level 2. <strong>The goal is not to reach Level 3 as fast as possible — it's to move one level at a time, solving real problems at each stage before adding more complexity.</strong></p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Honestly assess your current level before planning investments. Most organisations overestimate their maturity.</li>
+          <li>Move one level at a time. Each level solves specific problems — don't build Level 3 infrastructure before you've solved Level 1 problems.</li>
+          <li>Level 3 is not the goal for every organisation. The right level depends on the volume and criticality of your ML use cases.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s5">
+      <div class="section-num">05</div>
+      <h2>Monitoring in production — what to watch</h2>
+      <p>A model in production without monitoring is a liability waiting to materialise. Here are the four dimensions you need to monitor — and what happens when you don't.</p>
+
+      <div class="monitoring-grid">
+        <div class="monitoring-card">
+          <div class="monitoring-icon">📉</div>
+          <div class="monitoring-title">Model performance</div>
+          <div class="monitoring-desc">Are predictions still accurate? Track business metrics (conversion, churn, fraud detection rate) alongside model metrics. Business metrics are the ultimate truth.</div>
+        </div>
+        <div class="monitoring-card">
+          <div class="monitoring-icon">🌊</div>
+          <div class="monitoring-title">Data drift</div>
+          <div class="monitoring-desc">Is the input data distribution changing? If the real world looks different from the training data, model performance will degrade — often silently.</div>
+        </div>
+        <div class="monitoring-card">
+          <div class="monitoring-icon">⚡</div>
+          <div class="monitoring-title">System performance</div>
+          <div class="monitoring-desc">Latency, throughput, error rates, infrastructure costs. The model needs to perform reliably as a system, not just produce accurate predictions in isolation.</div>
+        </div>
+        <div class="monitoring-card">
+          <div class="monitoring-icon">⚖️</div>
+          <div class="monitoring-title">Fairness &amp; bias</div>
+          <div class="monitoring-desc">Are predictions fair across different demographic groups? Bias can emerge or worsen over time as data distributions shift. Especially critical in regulated industries.</div>
+        </div>
+      </div>
+
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Silent degradation</div>
+        <p>The most dangerous failure mode in production ML is silent degradation — the model keeps running, keeps returning predictions, but the predictions are increasingly wrong. <strong>Without monitoring, you may not discover this until the business impact is severe.</strong> Build alerting from day one.</p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Monitor all four dimensions — model performance, data drift, system performance, and fairness.</li>
+          <li>Business metrics are the most important signal. If the business outcome is degrading, something is wrong — find it.</li>
+          <li>Build alerting and response playbooks before launch, not after the first incident.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s6">
+      <div class="section-num">06</div>
+      <h2>Real examples from the field</h2>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 SDG Group — MLOps in insurance</div>
+        <p>In insurance transformation programs, operationalising ML models for pricing and risk assessment requires a particularly rigorous approach — these are high-stakes, regulated decisions where model failure has direct financial and compliance consequences. The key lesson from this context: <strong>explainability is not optional.</strong> Regulators and auditors need to understand why a model made a decision. This shapes the entire MLOps architecture — from model selection (preferring interpretable models) to monitoring (tracking not just accuracy but decision distribution) to documentation. Build for explainability from day one, not as a retrofit.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 GO plc — Telco analytics at scale</div>
+        <p>In a telecommunications context, ML models for churn prediction and customer analytics need to operate at scale — hundreds of thousands of customers, daily predictions, integration with CRM and marketing systems. The operational challenge here was not model accuracy (the models worked well) but <strong>pipeline reliability and data freshness.</strong> A churn model is only useful if it runs on time and on current data. Investing in robust data pipelines and monitoring proved more valuable than further model optimisation — a reminder that the infrastructure around the model matters as much as the model itself.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 datalitiks — ML in a resource-constrained startup</div>
+        <p>At a startup, you can't afford a dedicated MLOps team. The practical lesson: <strong>invest in the foundation, not the superstructure.</strong> Experiment tracking (MLflow), a simple model registry, and basic production monitoring gave us 80% of the value of a mature MLOps practice at 20% of the complexity. The temptation at startup scale is to skip MLOps entirely — but the cost of a silent model failure in a customer-facing product is higher than the cost of basic monitoring. Start simple. Start monitored.</p>
+      </div>
+
+      <div class="next-module">
+        <div>
+          <div class="next-label">Up next</div>
+          <div class="next-title">Module 06: ESG &amp; AI</div>
+        </div>
+        <a href="learning-hub.html" class="next-btn">
+          Coming soon
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="footer-logo">AI Leadership Hub</div>
+  <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%';
+}, { passive: true });
+document.querySelectorAll('.content-section').forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' }).observe(s);
+});
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 }).observe(el);
+});
+</script>
+</body>
+</html>
