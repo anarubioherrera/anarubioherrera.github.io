@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 03: Agentic AI & Automation — AI Leadership Hub</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16; --lime-dark: #4D7C0F;
+  --white: #FAFAF9; --off: #F5F5F4; --ink: #1C1917; --mid: #78716C; --border: #E7E5E4;
+  --f-display: 'Syne', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 0.6rem; }
+.nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--electric); animation: blink 2.5s ease-in-out infinite; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-cta { background: var(--electric); color: #fff; padding: 0.55rem 1.35rem; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px; transition: background 0.2s; }
+.nav-cta:hover { background: #4338CA; }
+
+.module-hero { padding: 9rem 3rem 5rem; background: var(--ink); color: var(--white); position: relative; overflow: hidden; }
+.module-hero::after { content: '03'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: var(--f-display); font-size: clamp(12rem, 22vw, 22rem); font-weight: 800; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; user-select: none; line-height: 1; }
+.module-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.4); margin-bottom: 1.5rem; }
+.module-breadcrumb a { color: var(--electric-light); transition: color 0.2s; }
+.module-breadcrumb span { opacity: 0.3; }
+.module-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(79,70,229,0.25); color: var(--electric-light); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 600; margin-bottom: 1.5rem; }
+.module-hero h1 { font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; max-width: 700px; margin-bottom: 1.5rem; position: relative; }
+.module-hero h1 span { color: var(--lime); }
+.module-hero-sub { font-size: 1.05rem; color: rgba(250,250,249,0.6); max-width: 580px; line-height: 1.75; margin-bottom: 3rem; position: relative; }
+.module-meta { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; }
+.meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+.meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.35); }
+.meta-val { font-size: 0.9rem; font-weight: 500; color: rgba(250,250,249,0.85); }
+
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--lime); z-index: 200; width: 0%; }
+.module-layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; gap: 5rem; align-items: start; }
+.sidebar { position: sticky; top: 6rem; }
+.sidebar-label { font-family: var(--f-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; }
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+.sidebar-nav a { display: block; padding: 0.5rem 0.75rem; font-size: 0.82rem; color: var(--mid); border-radius: 6px; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s, background 0.2s; line-height: 1.4; }
+.sidebar-nav a:hover { color: var(--ink); background: var(--off); }
+.sidebar-nav a.active { color: var(--electric); border-left-color: var(--electric); background: #EEF2FF; font-weight: 600; }
+.sidebar-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+.sidebar-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--mid); padding: 0.4rem 0; transition: color 0.2s; }
+.sidebar-back:hover { color: var(--electric); }
+
+.module-content { max-width: 680px; }
+.content-section { margin-bottom: 5rem; scroll-margin-top: 7rem; }
+.section-num { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-num::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
+.content-section h2 { font-family: var(--f-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+.content-section p { color: var(--mid); line-height: 1.85; margin-bottom: 1.25rem; font-size: 1rem; }
+.content-section p strong { color: var(--ink); font-weight: 600; }
+
+.callout { background: #EEF2FF; border-left: 3px solid var(--electric); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.5rem; }
+.callout p { color: #3730A3; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+
+.callout-warning { background: #FFFBEB; border-left: 3px solid #F59E0B; border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-warning .callout-label { color: #92400E; }
+.callout-warning p { color: #78350F; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+
+.real-world { background: var(--ink); border-radius: 16px; padding: 1.75rem 2rem; margin: 2rem 0; color: var(--white); }
+.real-world-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.75rem; }
+.real-world p { color: rgba(250,250,249,0.7); font-size: 0.95rem; line-height: 1.75; margin-bottom: 0; }
+.real-world p strong { color: var(--white); }
+
+.takeaways { background: var(--off); border-radius: 16px; padding: 1.75rem 2rem; margin: 2.5rem 0; }
+.takeaways-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.takeaways-label::before { content: '✦'; font-size: 0.6rem; color: var(--lime); }
+.takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.takeaway-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+.takeaway-list li::before { content: '→'; color: var(--electric); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.compare-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.compare-card.highlight { border-color: var(--electric); background: #EEF2FF; }
+.compare-card-label { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.75rem; }
+.compare-card.highlight .compare-card-label { color: var(--electric); }
+.compare-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.compare-card ul li { font-size: 0.85rem; color: var(--mid); line-height: 1.5; display: flex; gap: 0.5rem; }
+.compare-card ul li::before { content: '·'; color: var(--electric); font-weight: 700; flex-shrink: 0; }
+.compare-card.highlight ul li { color: #3730A3; }
+
+.agent-flow { display: flex; flex-direction: column; gap: 0; margin: 2rem 0; position: relative; }
+.agent-flow::before { content: ''; position: absolute; left: 23px; top: 24px; bottom: 24px; width: 2px; background: var(--border); }
+.agent-step { display: grid; grid-template-columns: 48px 1fr; gap: 1rem; padding: 1.25rem 0; align-items: start; position: relative; }
+.agent-step-icon { width: 48px; height: 48px; border-radius: 50%; background: var(--white); border: 2px solid var(--electric); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; z-index: 1; }
+.agent-step-title { font-family: var(--f-display); font-size: 0.95rem; font-weight: 800; margin-bottom: 0.3rem; }
+.agent-step-desc { font-size: 0.85rem; color: var(--mid); line-height: 1.65; }
+
+.use-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.use-case-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; }
+.use-case-card:hover { border-color: var(--electric); }
+.use-case-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.use-case-title { font-family: var(--f-display); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+.use-case-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+.prev-next { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.prev-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; transition: border-color 0.2s, color 0.2s; }
+.prev-link:hover { border-color: var(--ink); color: var(--ink); }
+
+.next-module { background: var(--electric); border-radius: 16px; padding: 2rem 2.5rem; margin-top: 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.next-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+.next-title { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.next-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); color: var(--electric); padding: 0.75rem 1.5rem; border-radius: 8px; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s; }
+.next-btn:hover { transform: translateY(-2px); }
+
+footer { background: var(--ink); color: var(--white); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+.footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.1rem 1.5rem; } .nav-links { display: none; }
+  .module-hero { padding: 7rem 1.5rem 4rem; }
+  .module-layout { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0; }
+  .sidebar { display: none; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .use-cases { grid-template-columns: 1fr; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>AI Leadership Hub</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="learning-hub.html" class="active">Learning Hub</a></li>
+    <li><a href="index.html#timeline">Career</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="module-hero">
+  <div class="module-breadcrumb">
+    <a href="learning-hub.html">Learning Hub</a><span>›</span>Module 03
+  </div>
+  <div class="module-tag">🤖 Agentic AI &amp; Automation</div>
+  <h1>Beyond chatbots:<br>AI that <span>acts,</span> not<br>just answers.</h1>
+  <p class="module-hero-sub">Agentic AI systems don't just respond to questions — they take sequences of actions to complete complex tasks. Here's what that means, why it matters, and how to deploy it responsibly.</p>
+  <div class="module-meta">
+    <div class="meta-item"><span class="meta-label">Reading time</span><span class="meta-val">~16 min</span></div>
+    <div class="meta-item"><span class="meta-label">Level</span><span class="meta-val">All levels</span></div>
+    <div class="meta-item"><span class="meta-label">Module</span><span class="meta-val">03 of 06</span></div>
+    <div class="meta-item"><span class="meta-label">By</span><span class="meta-val">Ana Rubio Herrera</span></div>
+  </div>
+</div>
+
+<div class="module-layout">
+  <aside class="sidebar">
+    <div class="sidebar-label">In this module</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s1" class="active">What is agentic AI?</a></li>
+      <li><a href="#s2">GenAI vs agents</a></li>
+      <li><a href="#s3">How agents work</a></li>
+      <li><a href="#s4">Real use cases</a></li>
+      <li><a href="#s5">Governance &amp; risk</a></li>
+      <li><a href="#s6">How to start</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <a href="module-02.html" class="sidebar-back">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Previous: AI Governance
+    </a>
+  </aside>
+
+  <article class="module-content">
+    <div class="prev-next">
+      <a href="module-02.html" class="prev-link">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Module 02: AI Governance
+      </a>
+    </div>
+
+    <div class="content-section reveal" id="s1">
+      <div class="section-num">01</div>
+      <h2>What is agentic AI — and why does it matter now?</h2>
+      <p>Most people's experience of AI is conversational: you ask, it answers. You prompt, it generates. This is useful — but it's a fraction of what AI systems can now do.</p>
+      <p><strong>Agentic AI refers to systems that don't just respond — they act.</strong> Given a goal, an agentic system breaks it into steps, uses tools to complete each step, evaluates the results, and continues until the task is done. It can search the web, read documents, write and run code, call APIs, send emails, update databases — all autonomously, in sequence, without a human prompting each step.</p>
+      <p>This is a meaningful shift. It moves AI from assistant to executor. And it changes the nature of the governance, oversight, and design questions you need to be asking.</p>
+
+      <div class="callout">
+        <div class="callout-label">A simple example</div>
+        <p>Instead of asking an AI to "write a competitive analysis," an agentic system can be given the goal of producing one — and will autonomously search for competitors, read their websites, extract relevant data, structure a comparison, and deliver a finished document. <strong>No prompt engineering at each step. Just a goal and a result.</strong></p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Agentic AI completes multi-step tasks autonomously — it's not a chatbot, it's a workflow executor.</li>
+          <li>This changes the risk profile significantly: mistakes compound across steps, and a human may not be present to catch them.</li>
+          <li>The organisations deploying agentic AI effectively today will have a significant head start within 12–18 months.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s2">
+      <div class="section-num">02</div>
+      <h2>GenAI vs agentic AI — what's actually different?</h2>
+      <p>The distinction matters for how you design, deploy, and govern these systems.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-card-label">Standard GenAI</div>
+          <ul>
+            <li>Single prompt → single response</li>
+            <li>Human drives every step</li>
+            <li>No memory between conversations</li>
+            <li>No access to external tools by default</li>
+            <li>Low autonomy, high human control</li>
+            <li>Risk contained to one output</li>
+          </ul>
+        </div>
+        <div class="compare-card highlight">
+          <div class="compare-card-label">Agentic AI</div>
+          <ul>
+            <li>Goal → autonomous multi-step execution</li>
+            <li>AI drives the steps, human sets the goal</li>
+            <li>Persistent memory across tasks</li>
+            <li>Accesses tools: web, APIs, databases, code</li>
+            <li>High autonomy, variable human control</li>
+            <li>Risk compounds across a chain of actions</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>The key implication: <strong>standard GenAI is a tool you use. Agentic AI is a system you deploy.</strong> The design, testing, oversight, and governance requirements are fundamentally different — and significantly more demanding.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Don't apply GenAI governance thinking to agentic systems — they need their own framework.</li>
+          <li>The higher the autonomy, the more critical the upfront design and testing.</li>
+          <li>Human-in-the-loop is not optional for high-stakes agentic workflows — build it into the architecture from the start.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s3">
+      <div class="section-num">03</div>
+      <h2>How agentic systems work — the key components</h2>
+      <p>Understanding the architecture helps you ask better questions when evaluating or commissioning agentic systems. Here are the core components of a typical agentic AI workflow.</p>
+
+      <div class="agent-flow">
+        <div class="agent-step">
+          <div class="agent-step-icon">🎯</div>
+          <div>
+            <div class="agent-step-title">Goal definition</div>
+            <div class="agent-step-desc">A human defines the objective — either through a prompt, a form, or a trigger event. The clearer and more constrained the goal, the more reliably the agent performs. Vague goals produce unpredictable behaviour.</div>
+          </div>
+        </div>
+        <div class="agent-step">
+          <div class="agent-step-icon">🧠</div>
+          <div>
+            <div class="agent-step-title">Planning &amp; reasoning</div>
+            <div class="agent-step-desc">The LLM at the core of the agent breaks the goal into a sequence of steps and decides which tools to use for each one. This is where the quality of the underlying model matters most.</div>
+          </div>
+        </div>
+        <div class="agent-step">
+          <div class="agent-step-icon">🔧</div>
+          <div>
+            <div class="agent-step-title">Tool use</div>
+            <div class="agent-step-desc">The agent executes each step using available tools — web search, code execution, database queries, API calls, file operations. The set of tools available defines what the agent can and can't do.</div>
+          </div>
+        </div>
+        <div class="agent-step">
+          <div class="agent-step-icon">💾</div>
+          <div>
+            <div class="agent-step-title">Memory &amp; context</div>
+            <div class="agent-step-desc">Agents maintain context across steps — short-term (within a task) and sometimes long-term (across tasks). This enables coherent multi-step execution but also introduces data retention considerations.</div>
+          </div>
+        </div>
+        <div class="agent-step">
+          <div class="agent-step-icon">✅</div>
+          <div>
+            <div class="agent-step-title">Evaluation &amp; output</div>
+            <div class="agent-step-desc">The agent evaluates whether the goal has been achieved and delivers the result — or loops back to try a different approach. Human review at this stage is critical for high-stakes outputs.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>The quality of goal definition determines the quality of agentic output — invest time in specifying what "done" looks like.</li>
+          <li>Tool access is a governance decision: only give agents access to the tools they need for the task, nothing more.</li>
+          <li>Build evaluation checkpoints into agentic workflows — don't let them run fully unmonitored for high-stakes tasks.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s4">
+      <div class="section-num">04</div>
+      <h2>Real use cases — where agentic AI creates value today</h2>
+      <p>Agentic AI is moving fast from research to production. Here are the use cases delivering real value right now — including in contexts I've worked in directly.</p>
+
+      <div class="use-cases">
+        <div class="use-case-card">
+          <div class="use-case-icon">📊</div>
+          <div class="use-case-title">Automated reporting</div>
+          <div class="use-case-desc">Agents that pull data from multiple sources, run analysis, generate narrative commentary, and produce a finished report — triggered on a schedule or by an event.</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">🔍</div>
+          <div class="use-case-title">Research &amp; due diligence</div>
+          <div class="use-case-desc">Given a company or topic, an agent searches multiple sources, extracts key information, flags risks, and delivers a structured briefing — in minutes rather than days.</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">📋</div>
+          <div class="use-case-title">Project workflow automation</div>
+          <div class="use-case-desc">Agents that generate status reports, update project documentation, draft meeting summaries, and route actions to the right people — triggered by calendar events or task completions.</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">🛠</div>
+          <div class="use-case-title">Code generation &amp; review</div>
+          <div class="use-case-desc">Agents that write, test, debug, and document code — reducing development time for well-scoped tasks significantly. Most effective when the scope is tight and the tests are clear.</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">📩</div>
+          <div class="use-case-title">Inbox &amp; comms triage</div>
+          <div class="use-case-desc">Agents that read, classify, summarise, and draft responses to incoming communications — flagging what needs human attention and handling routine queries autonomously.</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">🔄</div>
+          <div class="use-case-title">Data pipeline orchestration</div>
+          <div class="use-case-desc">Agents that monitor data pipelines, detect anomalies, trigger remediation actions, and notify the right people — reducing the manual overhead of data operations significantly.</div>
+        </div>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 SDG Group — Agentic AI in transformation programs</div>
+        <p>In insurance transformation programs at SDG Group, agentic AI frameworks were deployed to automate project workflows and deliverable generation. The results were significant — <strong>tasks that previously required hours of manual work were completed autonomously in minutes</strong>, with human review at the output stage. The key design decision was defining tight scope: each agent had a clearly bounded task, access only to the data it needed, and a human checkpoint before any output was shared externally. This constraint-first design is what made it safe to deploy at scale.</p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>The highest-value agentic use cases are those with clear inputs, clear outputs, and well-defined success criteria.</li>
+          <li>Start with internal, lower-stakes workflows before deploying agents in customer-facing or regulated contexts.</li>
+          <li>Tight scope + human review at output = the minimum viable governance for agentic deployment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s5">
+      <div class="section-num">05</div>
+      <h2>Governance &amp; risk — what's different with agents</h2>
+      <p>Agentic AI introduces governance challenges that simply don't exist with standard GenAI. The autonomy that makes agents powerful is also what makes them riskier. Here's what you need to think about.</p>
+
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Compounding errors</div>
+        <p>In a multi-step agentic workflow, an error in step 2 propagates through steps 3, 4, and 5. By the time a human sees the output, the mistake may be deeply embedded in the result. <strong>Build validation checkpoints into long chains — don't let agents run 20 steps without a review gate.</strong></p>
+      </div>
+
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Scope creep</div>
+        <p>Agents given broad goals and broad tool access will sometimes take actions outside the intended scope — accessing data they shouldn't, triggering unintended side effects, or making decisions that should have been escalated. <strong>Minimum necessary access is not just a security principle — it's an agentic design principle.</strong></p>
+      </div>
+
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Auditability</div>
+        <p>When an agent takes 15 actions to complete a task, can you reconstruct exactly what it did and why? If not, you have an auditability problem — especially in regulated industries. <strong>Every agentic deployment in a regulated context needs a full action log.</strong></p>
+      </div>
+
+      <p>The governance principles for agentic AI build on the framework from Module 02, with three additional requirements: <strong>minimum tool access, mandatory checkpoints, and full auditability.</strong> These are non-negotiable for any production agentic deployment.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Give agents the minimum tool access necessary — not everything they could theoretically use.</li>
+          <li>Build human review gates into long agentic chains, especially before any external action (sending, publishing, updating).</li>
+          <li>Ensure every production agentic system produces a full, queryable action log — this is your audit trail.</li>
+          <li>For regulated industries: get legal and compliance involved before deployment, not after.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s6">
+      <div class="section-num">06</div>
+      <h2>How to start — your first agentic deployment</h2>
+      <p>The most common mistake I see is organisations trying to build a complex, multi-system agentic deployment before they understand how agents actually behave in practice. Start small. Learn fast. Scale what works.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Action plan — first agentic deployment</div>
+        <ul class="takeaway-list">
+          <li><strong>Pick one internal, low-stakes workflow.</strong> Something that is repetitive, time-consuming, and has clear inputs and outputs. Internal reporting, meeting summaries, or research briefings are good starting points.</li>
+          <li><strong>Define "done" precisely.</strong> What does a successful output look like? What format? What information must it include? What would make it wrong? Write this down before you build anything.</li>
+          <li><strong>Start with existing tools.</strong> Before building custom agents, explore what tools like Microsoft Copilot, Claude, or n8n can do out of the box for your use case. You may not need to build anything custom for your first deployment.</li>
+          <li><strong>Run it in parallel with the manual process.</strong> For the first 2–4 weeks, have a human do the task manually and compare with the agent output. This surfaces errors and builds confidence before you remove the manual step.</li>
+          <li><strong>Document what went wrong.</strong> Every agentic deployment will have failure modes you didn't anticipate. Capture them, fix them, and build your institutional knowledge about how agents behave in your specific context.</li>
+        </ul>
+      </div>
+
+      <p>Agentic AI is not science fiction — it is being deployed in production today, in organisations of all sizes. The question is not whether to engage with it, but how to do so in a way that builds capability without creating unmanaged risk. Start now, start small, and build the muscle before you need it at scale.</p>
+
+      <div class="next-module">
+        <div>
+          <div class="next-label">Up next</div>
+          <div class="next-title">Module 04: Data Platform Modernisation</div>
+        </div>
+        <a href="learning-hub.html" class="next-btn">
+          Coming soon
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="footer-logo">AI Leadership Hub</div>
+  <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%';
+}, { passive: true });
+document.querySelectorAll('.content-section').forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' }).observe(s);
+});
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 }).observe(el);
+});
+</script>
+</body>
+</html>
