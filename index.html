@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Leadership Hub — Ana Rubio Herrera</title>
+<meta name="description" content="Practical AI leadership frameworks, real-world case studies, and field-tested methods — by Ana Rubio Herrera." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --electric: #4F46E5;
+  --electric-light: #818CF8;
+  --lime: #84CC16;
+  --lime-dark: #4D7C0F;
+  --coral: #F97316;
+  --white: #FAFAF9;
+  --off: #F5F5F4;
+  --ink: #1C1917;
+  --mid: #78716C;
+  --border: #E7E5E4;
+  --f-display: 'Syne', sans-serif;
+  --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 3rem;
+  background: var(--white);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-color: var(--border); }
+.nav-logo {
+  font-family: var(--f-display);
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--electric);
+  animation: blink 2.5s ease-in-out infinite;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--electric); color: #fff;
+  padding: 0.55rem 1.35rem;
+  font-family: var(--f-display); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: #4338CA; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100svh; padding: 0 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg-num {
+  position: absolute; right: -3rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(18rem, 30vw, 30rem); line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.5px #E7E5E4;
+  pointer-events: none; user-select: none;
+  animation: numFloat 12s ease-in-out infinite;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #EEF2FF; color: var(--electric);
+  padding: 0.4rem 1rem; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 500;
+  margin-bottom: 2rem; width: fit-content;
+  opacity: 0; animation: slideUp 0.7s 0.1s var(--ease) forwards;
+}
+.hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--electric); }
+.hero-headline {
+  font-family: var(--f-display);
+  font-size: clamp(3.2rem, 6.5vw, 7rem); font-weight: 800;
+  line-height: 1.0; letter-spacing: -0.02em;
+  color: var(--ink); max-width: 900px; margin-bottom: 2rem;
+  opacity: 0; animation: slideUp 0.8s 0.25s var(--ease) forwards;
+}
+.hero-headline .accent {
+  color: var(--electric); position: relative; display: inline-block;
+}
+.hero-headline .accent::after {
+  content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
+  height: 6px; background: var(--lime); opacity: 0.4; z-index: -1; border-radius: 2px;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--mid); max-width: 560px;
+  line-height: 1.75; margin-bottom: 2.5rem;
+  opacity: 0; animation: slideUp 0.8s 0.4s var(--ease) forwards;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: slideUp 0.8s 0.55s var(--ease) forwards;
+}
+.btn-solid {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--ink); color: var(--white);
+  padding: 0.9rem 2rem; font-family: var(--f-display);
+  font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-solid:hover { background: var(--electric); transform: translateY(-2px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--ink); border: 1.5px solid var(--border);
+  padding: 0.9rem 2rem; font-family: var(--f-display);
+  font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.btn-outline:hover { border-color: var(--ink); transform: translateY(-2px); }
+.hero-stats {
+  display: flex; gap: 3rem; margin-top: 5rem;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+  opacity: 0; animation: slideUp 0.8s 0.7s var(--ease) forwards;
+}
+.stat-num {
+  font-family: var(--f-display); font-size: 2.4rem; font-weight: 800;
+  color: var(--electric); line-height: 1;
+}
+.stat-text { font-size: 0.8rem; color: var(--mid); margin-top: 0.25rem; }
+
+/* MARQUEE */
+.marquee-strip {
+  background: var(--electric); overflow: hidden;
+  padding: 0.85rem 0; display: flex;
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: marquee 28s linear infinite; white-space: nowrap;
+}
+.marquee-item {
+  font-family: var(--f-display); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85); padding: 0 2.5rem;
+  display: flex; align-items: center; gap: 2.5rem;
+}
+.marquee-item::after { content: '✦'; color: var(--lime); font-size: 0.6rem; }
+
+/* SECTIONS */
+section { padding: 7rem 3rem; }
+.section-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-family: var(--f-display); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric);
+  margin-bottom: 1.5rem;
+}
+.section-tag::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
+
+/* ABOUT */
+.about { background: var(--ink); color: var(--white); }
+.about-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: center; }
+.about .section-tag { color: var(--lime); }
+.about-headline {
+  font-family: var(--f-display); font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem;
+}
+.about-headline span { color: var(--lime); }
+.about-body { color: rgba(250,250,249,0.65); line-height: 1.8; }
+.about-body p + p { margin-top: 1.25rem; }
+.about-body strong { color: var(--white); font-weight: 500; }
+.about-cards { display: flex; flex-direction: column; gap: 1rem; }
+.about-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1.25rem 1.5rem;
+  display: flex; align-items: flex-start; gap: 1rem;
+  transition: background 0.25s, border-color 0.25s;
+}
+.about-card:hover { background: rgba(79,70,229,0.15); border-color: rgba(129,140,248,0.4); }
+.about-card-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: rgba(79,70,229,0.3); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+.about-card-label {
+  font-family: var(--f-display); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--electric-light); margin-bottom: 0.2rem;
+}
+.about-card-text { font-size: 0.85rem; color: rgba(250,250,249,0.55); line-height: 1.5; }
+
+/* MODULES */
+.modules { background: var(--off); }
+.modules-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+.modules-headline {
+  font-family: var(--f-display); font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+}
+.modules-headline span { color: var(--electric); }
+.modules-intro { color: var(--mid); line-height: 1.8; }
+.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.module-card {
+  background: var(--white); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 2rem; display: flex; flex-direction: column; gap: 1rem;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; cursor: default;
+}
+.module-card:hover { border-color: var(--electric); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(79,70,229,0.1); }
+.module-num {
+  font-family: var(--f-display); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--electric-light);
+}
+.module-header { display: flex; align-items: center; gap: 0.75rem; }
+.module-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.module-title { font-family: var(--f-display); font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+.module-desc { font-size: 0.85rem; color: var(--mid); line-height: 1.7; flex: 1; }
+.module-badge {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.68rem; font-weight: 500; padding: 0.3rem 0.75rem;
+  border-radius: 100px; width: fit-content;
+}
+.badge-soon { background: #FEF9C3; color: #854D0E; }
+.badge-live { background: #DCFCE7; color: #166534; }
+.badge-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #16A34A; animation: blink 2s ease-in-out infinite; }
+.mi-1 { background: #EEF2FF; }
+.mi-2 { background: #FEF3C7; }
+.mi-3 { background: #FCE7F3; }
+.mi-4 { background: #ECFDF5; }
+.mi-5 { background: #FFF7ED; }
+.mi-6 { background: #F0FDF4; }
+
+/* EXPERIENCE */
+.experience { background: var(--white); }
+.exp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
+.exp-card {
+  border: 1.5px solid var(--border); border-radius: 16px; padding: 2rem;
+  display: flex; flex-direction: column; gap: 1.25rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.exp-card:hover { border-color: var(--ink); transform: translateY(-3px); }
+.exp-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.exp-org { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.3rem; }
+.exp-role { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
+.exp-period { font-size: 0.75rem; color: var(--mid); white-space: nowrap; margin-top: 0.1rem; }
+.exp-detail { font-size: 0.875rem; color: var(--mid); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+.exp-highlight {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 500; color: var(--lime-dark);
+  background: #F7FEE7; padding: 0.3rem 0.75rem; border-radius: 100px; margin-top: 0.5rem;
+}
+
+/* CTA */
+.cta-section {
+  background: var(--electric); padding: 8rem 3rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: 'AI'; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-family: var(--f-display); font-size: 40vw; font-weight: 800;
+  color: rgba(255,255,255,0.04); white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-headline {
+  font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800; line-height: 1.1; color: var(--white); letter-spacing: -0.02em;
+  margin-bottom: 1.25rem; position: relative;
+}
+.cta-headline span { color: var(--lime); }
+.cta-sub { color: rgba(250,250,249,0.7); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.75; position: relative; }
+.btn-white {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--white); color: var(--electric);
+  padding: 1rem 2.25rem; font-family: var(--f-display);
+  font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s; position: relative;
+}
+.btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+/* FOOTER */
+footer {
+  background: var(--ink); color: var(--white);
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { font-size: 0.8rem; color: rgba(250,250,249,0.45); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
+
+/* ANIMATIONS */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes numFloat {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  50%       { transform: translateY(-52%) rotate(1deg); }
+}
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1.1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 5rem 1.5rem; }
+  .hero { padding: 0 1.5rem; }
+  .hero-bg-num { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .modules-grid { grid-template-columns: 1fr 1fr; }
+  .modules-header { grid-template-columns: 1fr; gap: 1.5rem; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 2rem; }
+  footer { padding: 2rem 1.5rem; }
+  .cta-section { padding: 5rem 1.5rem; }
+}
+@media (max-width: 600px) {
+  .modules-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    AI Leadership Hub
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#modules">Learning Hub</a></li>
+    <li><a href="#experience">Experience</a></li>
+  </ul>
+  <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-num">AI</div>
+  <div class="hero-tag"><div class="hero-tag-dot"></div>Data &amp; AI Strategy · Barcelona</div>
+  <h1 class="hero-headline">AI that<br>actually <span class="accent">works</span><br>in the real world.</h1>
+  <p class="hero-sub">Practical frameworks and field-tested methods for embedding AI into organisations — from governance models to generative workflows that deliver measurable results.</p>
+  <div class="hero-actions">
+    <a href="#modules" class="btn-solid">
+      Explore the Learning Hub
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#about" class="btn-outline">About Ana</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-text">Years in Data &amp; AI</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-text">Learning modules</div></div>
+    <div class="stat"><div class="stat-num">~40%</div><div class="stat-text">Productivity gains with GenAI</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-text">Continents of experience</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item">AI Governance</div><div class="marquee-item">Generative AI</div>
+    <div class="marquee-item">Agentic AI</div><div class="marquee-item">Data Strategy</div>
+    <div class="marquee-item">MLOps</div><div class="marquee-item">ESG &amp; Data</div>
+    <div class="marquee-item">Databricks</div><div class="marquee-item">Analytics Transformation</div>
+    <div class="marquee-item">Power BI</div>
+    <div class="marquee-item">AI Governance</div><div class="marquee-item">Generative AI</div>
+    <div class="marquee-item">Agentic AI</div><div class="marquee-item">Data Strategy</div>
+    <div class="marquee-item">MLOps</div><div class="marquee-item">ESG &amp; Data</div>
+    <div class="marquee-item">Databricks</div><div class="marquee-item">Analytics Transformation</div>
+    <div class="marquee-item">Power BI</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag reveal">About</div>
+      <h2 class="about-headline reveal reveal-delay-1">Built on real<br>experience,<br>not <span>just theory.</span></h2>
+      <div class="about-body reveal reveal-delay-2">
+        <p>I'm <strong>Ana Rubio Herrera</strong> — a Data &amp; AI Strategy Leader with 10+ years driving transformation across the <strong>United Nations</strong>, <strong>Allianz</strong>, and my own ESG data startup.</p>
+        <p>I built this hub to share what actually works: practical methods for embedding AI before it becomes mainstream, tested across Europe and Latin America.</p>
+      </div>
+    </div>
+    <div class="about-cards reveal reveal-delay-3">
+      <div class="about-card">
+        <div class="about-card-icon">🌍</div>
+        <div><div class="about-card-label">Global reach</div><div class="about-card-text">Programs across Spain, Portugal, Colombia, Brazil &amp; Switzerland</div></div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">⚡</div>
+        <div><div class="about-card-label">Early GenAI adopter</div><div class="about-card-text">Reduced task time ~40% through systematic AI integration at scale</div></div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🚀</div>
+        <div><div class="about-card-label">Founder mindset</div><div class="about-card-text">Built &amp; led an ESG data startup from zero to paying clients</div></div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🏛</div>
+        <div><div class="about-card-label">Institutional credibility</div><div class="about-card-text">Data consultant for the United Nations in Geneva</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules" id="modules">
+  <div class="modules-header">
+    <div>
+      <div class="section-tag reveal">Learning Hub</div>
+      <h2 class="modules-headline reveal reveal-delay-1">Six modules.<br><span>Zero fluff.</span></h2>
+    </div>
+    <p class="modules-intro reveal reveal-delay-2">Each module draws from real engagements — the UN, Allianz, a GenAI-powered startup. Frameworks you can use on Monday morning.</p>
+  </div>
+  <div class="modules-grid">
+    <div class="module-card reveal">
+      <div class="module-num">Module 01</div>
+      <div class="module-header"><div class="module-icon mi-1">⚡</div><div class="module-title">GenAI Foundations</div></div>
+      <p class="module-desc">Cut through the hype. Understand what generative AI actually is, where it creates real business value, and how to adopt it before your competitors do.</p>
+      <span class="module-badge badge-soon">Coming soon</span>
+    </div>
+    <div class="module-card reveal reveal-delay-1">
+      <div class="module-num">Module 02</div>
+      <div class="module-header"><div class="module-icon mi-2">🏛</div><div class="module-title">AI Governance &amp; Strategy</div></div>
+      <p class="module-desc">Build governance that enables innovation. Risk frameworks, data ownership, regulatory readiness — and how to get board-level buy-in.</p>
+      <span class="module-badge badge-soon">Coming soon</span>
+    </div>
+    <div class="module-card reveal reveal-delay-2">
+      <div class="module-num">Module 03</div>
+      <div class="module-header"><div class="module-icon mi-3">🤖</div><div class="module-title">Agentic AI &amp; Automation</div></div>
+      <p class="module-desc">Beyond chatbots: designing agentic systems that run real workflows. Architecture, orchestration, and governance from live deployments.</p>
+      <span class="module-badge badge-soon">Coming soon</span>
+    </div>
+    <div class="module-card reveal reveal-delay-1">
+      <div class="module-num">Module 04</div>
+      <div class="module-header"><div class="module-icon mi-4">🏗</div><div class="module-title">Data Platform Modernisation</div></div>
+      <p class="module-desc">From legacy warehouse to cloud-native. Migration playbooks, stakeholder alignment, and maintaining trust in data during transitions.</p>
+      <span class="module-badge badge-soon">Coming soon</span>
+    </div>
+    <div class="module-card reveal reveal-delay-2">
+      <div class="module-num">Module 05</div>
+      <div class="module-header"><div class="module-icon mi-5">⚙️</div><div class="module-title">MLOps in Practice</div></div>
+      <p class="module-desc">Operationalising ML is an organisational problem, not just a technical one. Pipelines, monitoring, and bridging data science with business outcomes.</p>
+      <span class="module-badge badge-soon">Coming soon</span>
+    </div>
+    <div class="module-card reveal reveal-delay-3">
+      <div class="module-num">Module 06</div>
+      <div class="module-header"><div class="module-icon mi-6">🌱</div><div class="module-title">ESG &amp; AI</div></div>
+      <p class="module-desc">Turning sustainability reporting from compliance exercise into competitive advantage. Built from direct experience founding an ESG analytics platform.</p>
+      <span class="module-badge badge-soon">Coming soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-tag reveal">Experience</div>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <div class="exp-top">
+        <div><div class="exp-org">SDG Group</div><div class="exp-role">Manager, Data &amp; AI Transformation</div></div>
+        <div class="exp-period">2025–Now</div>
+      </div>
+      <div class="exp-detail">Leading large-scale modernisation programs for the insurance sector across Spain, Portugal, Colombia, and Brazil.<br/><br/><span class="exp-highlight">⚡ ~40% task time reduction via GenAI</span></div>
+    </div>
+    <div class="exp-card reveal reveal-delay-1">
+      <div class="exp-top">
+        <div><div class="exp-org">United Nations</div><div class="exp-role">Data Consultant</div></div>
+        <div class="exp-period">2022–2025</div>
+      </div>
+      <div class="exp-detail">Data quality frameworks, Power BI environments, and Databricks warehouse migration in Geneva.<br/><br/><span class="exp-highlight">🌍 Geneva, Switzerland</span></div>
+    </div>
+    <div class="exp-card reveal reveal-delay-2">
+      <div class="exp-top">
+        <div><div class="exp-org">datalitiks</div><div class="exp-role">Founder &amp; CEO</div></div>
+        <div class="exp-period">2022–2024</div>
+      </div>
+      <div class="exp-detail">Founded an ESG data and analytics platform in Malta. Early GenAI adopter from day one — lean team delivering at scale.<br/><br/><span class="exp-highlight">🚀 ~30% faster dev · ~40% lower content costs</span></div>
+    </div>
+    <div class="exp-card reveal reveal-delay-3">
+      <div class="exp-top">
+        <div><div class="exp-org">GO plc · Telefonica</div><div class="exp-role">Data Insights Manager</div></div>
+        <div class="exp-period">2015–2022</div>
+      </div>
+      <div class="exp-detail">Progressive growth from analyst to analytics leadership across two major telco groups.<br/><br/><span class="exp-highlight">📊 Hundreds of BI users across the org</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 class="cta-headline reveal">Ready to lead<br>with <span>AI?</span></h2>
+  <p class="cta-sub reveal reveal-delay-1">The hub launches soon. Get in touch for early access to modules, case studies, and the AI readiness framework.</p>
+  <a href="mailto:anarubioherrera@hotmail.com" class="btn-white reveal reveal-delay-2">
+    Get in touch
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AI Leadership Hub</div>
+  <ul class="footer-links">
+    <li><a href="https://linkedin.com/in/anarubioherrera" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="mailto:anarubioherrera@hotmail.com">Email</a></li>
+    <li><a href="#modules">Learning Hub</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
