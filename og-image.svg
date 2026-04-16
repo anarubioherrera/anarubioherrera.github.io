@@ -1,0 +1,53 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="rgba(255,255,255,0.06)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1C1917"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="6" height="630" fill="#4F46E5"/>
+
+  <!-- Big decorative text -->
+  <text x="700" y="560" font-family="Georgia, serif" font-size="480" font-weight="700"
+    fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1.5">AI</text>
+
+  <!-- Lime accent line -->
+  <rect x="60" y="178" width="60" height="4" rx="2" fill="#84CC16"/>
+
+  <!-- Tag pill -->
+  <rect x="60" y="118" width="228" height="36" rx="18" fill="rgba(79,70,229,0.3)"/>
+  <text x="80" y="141" font-family="Arial, sans-serif" font-size="12" fill="#818CF8" letter-spacing="2" font-weight="600">DATA &amp; AI STRATEGY</text>
+
+  <!-- Main headline -->
+  <text x="60" y="272" font-family="Georgia, serif" font-size="76" font-weight="700" fill="#FAFAF9" letter-spacing="-2">AI Leadership</text>
+  <text x="60" y="358" font-family="Georgia, serif" font-size="76" font-weight="700" fill="#84CC16" letter-spacing="-2">Hub</text>
+
+  <!-- Subtext -->
+  <text x="60" y="418" font-family="Arial, sans-serif" font-size="21" fill="rgba(250,240,232,0.5)">Practical frameworks · Real case studies · Field-tested methods</text>
+
+  <!-- Divider -->
+  <rect x="60" y="468" width="500" height="1" fill="rgba(255,255,255,0.1)"/>
+
+  <!-- Avatar circle -->
+  <circle cx="78" cy="508" r="18" fill="#4F46E5"/>
+  <text x="78" y="514" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="white" text-anchor="middle">AR</text>
+
+  <!-- Author name -->
+  <text x="108" y="504" font-family="Arial, sans-serif" font-size="17" font-weight="600" fill="rgba(250,240,232,0.9)">Ana Rubio Herrera</text>
+  <text x="108" y="524" font-family="Arial, sans-serif" font-size="14" fill="rgba(250,240,232,0.38)">anarubioherrera.github.io</text>
+
+  <!-- Stats -->
+  <text x="680" y="408" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#4F46E5">10+</text>
+  <text x="680" y="432" font-family="Arial, sans-serif" font-size="12" fill="rgba(250,240,232,0.38)" letter-spacing="1.5">YEARS IN DATA &amp; AI</text>
+
+  <text x="830" y="408" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#4F46E5">6</text>
+  <text x="830" y="432" font-family="Arial, sans-serif" font-size="12" fill="rgba(250,240,232,0.38)" letter-spacing="1.5">MODULES</text>
+
+  <text x="940" y="408" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#4F46E5">3</text>
+  <text x="940" y="432" font-family="Arial, sans-serif" font-size="12" fill="rgba(250,240,232,0.38)" letter-spacing="1.5">CASE STUDIES</text>
+</svg>
