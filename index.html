@@ -4,8 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Leadership Hub — Ana Rubio Herrera</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<meta name="description" content="Practical AI leadership frameworks, real-world case studies, and field-tested methods — by Ana Rubio Herrera." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="description" content="Ana Rubio Herrera — Data & AI Strategy Leader. Practical frameworks and field-tested methods for embedding AI into organisations. Based in Barcelona." />
+<meta name="keywords" content="AI strategy, data strategy, GenAI, AI governance, data transformation, analytics, MLOps, ESG data, Barcelona" />
+<meta name="author" content="Ana Rubio Herrera" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://anarubioherrera.github.io/" />
+<meta property="og:title" content="AI Leadership Hub — Ana Rubio Herrera" />
+<meta property="og:description" content="Practical AI leadership frameworks, real-world case studies, and field-tested methods for embedding AI into organisations." />
+<meta property="og:image" content="https://anarubioherrera.github.io/og-image.svg" />
+<meta property="og:site_name" content="AI Leadership Hub" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Leadership Hub — Ana Rubio Herrera" />
+<meta name="twitter:description" content="Practical AI leadership frameworks, real-world case studies, and field-tested methods for embedding AI into organisations." />
+<meta name="twitter:image" content="https://anarubioherrera.github.io/og-image.svg" />
+<link rel="canonical" href="https://anarubioherrera.github.io/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
@@ -39,7 +52,6 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 
-/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -73,7 +85,6 @@ nav.scrolled { border-color: var(--border); }
 }
 .nav-cta:hover { background: #4338CA; transform: translateY(-1px); }
 
-/* HERO */
 .hero {
   min-height: 100svh; padding: 0 3rem;
   display: flex; flex-direction: column; justify-content: center;
@@ -148,7 +159,6 @@ nav.scrolled { border-color: var(--border); }
 }
 .stat-text { font-size: 0.8rem; color: var(--mid); margin-top: 0.25rem; }
 
-/* MARQUEE */
 .marquee-strip {
   background: var(--electric); overflow: hidden;
   padding: 0.85rem 0; display: flex;
@@ -165,7 +175,6 @@ nav.scrolled { border-color: var(--border); }
 }
 .marquee-item::after { content: '✦'; color: var(--lime); font-size: 0.6rem; }
 
-/* SECTIONS */
 section { padding: 7rem 3rem; }
 .section-tag {
   display: inline-flex; align-items: center; gap: 0.4rem;
@@ -175,7 +184,6 @@ section { padding: 7rem 3rem; }
 }
 .section-tag::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
 
-/* ABOUT */
 .about { background: var(--ink); color: var(--white); }
 .about-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: center; }
 .about .section-tag { color: var(--lime); }
@@ -207,7 +215,6 @@ section { padding: 7rem 3rem; }
 }
 .about-card-text { font-size: 0.85rem; color: rgba(250,250,249,0.55); line-height: 1.5; }
 
-/* MODULES */
 .modules { background: var(--off); }
 .modules-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
 .modules-headline {
@@ -246,27 +253,6 @@ section { padding: 7rem 3rem; }
 .mi-5 { background: #FFF7ED; }
 .mi-6 { background: #F0FDF4; }
 
-/* EXPERIENCE */
-.experience { background: var(--white); }
-.exp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3rem; }
-.exp-card {
-  border: 1.5px solid var(--border); border-radius: 16px; padding: 2rem;
-  display: flex; flex-direction: column; gap: 1.25rem;
-  transition: border-color 0.25s, transform 0.25s;
-}
-.exp-card:hover { border-color: var(--ink); transform: translateY(-3px); }
-.exp-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
-.exp-org { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.3rem; }
-.exp-role { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
-.exp-period { font-size: 0.75rem; color: var(--mid); white-space: nowrap; margin-top: 0.1rem; }
-.exp-detail { font-size: 0.875rem; color: var(--mid); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 1.25rem; }
-.exp-highlight {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  font-size: 0.78rem; font-weight: 500; color: var(--lime-dark);
-  background: #F7FEE7; padding: 0.3rem 0.75rem; border-radius: 100px; margin-top: 0.5rem;
-}
-
-/* CTA */
 .cta-section {
   background: var(--electric); padding: 8rem 3rem;
   text-align: center; position: relative; overflow: hidden;
@@ -293,7 +279,6 @@ section { padding: 7rem 3rem; }
 }
 .btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
 
-/* FOOTER */
 footer {
   background: var(--ink); color: var(--white);
   padding: 2.5rem 3rem;
@@ -306,7 +291,6 @@ footer {
 .footer-links a:hover { color: var(--white); }
 .footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
 
-/* TIMELINE */
 .timeline-section { background: var(--white); }
 .timeline-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .timeline-intro-headline {
@@ -315,9 +299,7 @@ footer {
 }
 .timeline-intro-headline span { color: var(--electric); }
 .timeline-intro-body { color: var(--mid); line-height: 1.8; margin-bottom: 2rem; }
-.timeline-langs {
-  display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;
-}
+.timeline-langs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
 .lang-pill {
   padding: 0.3rem 0.9rem; border-radius: 100px;
   font-size: 0.75rem; font-weight: 500;
@@ -339,33 +321,25 @@ footer {
 .edu-item-name { font-weight: 600; font-size: 0.85rem; }
 .edu-item-year { font-size: 0.75rem; color: var(--mid); margin-left: auto; }
 
-/* Timeline items */
 .tl { position: relative; }
 .tl::before {
   content: ''; position: absolute; left: 15px; top: 0; bottom: 0;
   width: 1px; background: var(--border);
 }
-.tl-item {
-  position: relative; padding-left: 3rem; padding-bottom: 0.5rem; cursor: pointer;
-}
+.tl-item { position: relative; padding-left: 3rem; padding-bottom: 0.5rem; cursor: pointer; }
 .tl-dot {
   position: absolute; left: 9px; top: 18px;
   width: 13px; height: 13px; border-radius: 50%;
   background: var(--white); border: 2px solid var(--border);
-  transition: border-color 0.25s, background 0.25s;
-  z-index: 1;
+  transition: border-color 0.25s, background 0.25s; z-index: 1;
 }
-.tl-item.active .tl-dot,
-.tl-item:hover .tl-dot { border-color: var(--electric); background: var(--electric); }
-
+.tl-item.active .tl-dot, .tl-item:hover .tl-dot { border-color: var(--electric); background: var(--electric); }
 .tl-header {
   padding: 1rem 1.25rem; border: 1.5px solid var(--border); border-radius: 12px;
-  transition: border-color 0.25s, background 0.25s;
-  margin-bottom: 0;
+  transition: border-color 0.25s, background 0.25s; margin-bottom: 0;
 }
 .tl-item:hover .tl-header { border-color: #C7D2FE; background: #F5F6FF; }
 .tl-item.active .tl-header { border-color: var(--electric); background: #EEF2FF; }
-
 .tl-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
 .tl-org { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--electric); margin-bottom: 0.2rem; }
 .tl-role { font-family: var(--f-display); font-size: 1rem; font-weight: 800; line-height: 1.2; }
@@ -376,63 +350,33 @@ footer {
   transition: transform 0.3s var(--ease), color 0.2s;
 }
 .tl-item.active .tl-chevron { transform: rotate(180deg); color: var(--electric); }
-
-.tl-body {
-  max-height: 0; overflow: hidden;
-  transition: max-height 0.45s var(--ease), opacity 0.3s;
-  opacity: 0;
-}
+.tl-body { max-height: 0; overflow: hidden; transition: max-height 0.45s var(--ease), opacity 0.3s; opacity: 0; }
 .tl-item.active .tl-body { max-height: 400px; opacity: 1; }
 .tl-body-inner {
   padding: 1.25rem 1.25rem 0.25rem;
   border: 1.5px solid var(--electric); border-top: none;
-  border-radius: 0 0 12px 12px;
-  background: #F8F9FF;
-  margin-bottom: 0.75rem;
+  border-radius: 0 0 12px 12px; background: #F8F9FF; margin-bottom: 0.75rem;
 }
 .tl-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
 .tl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.tl-tag {
-  padding: 0.2rem 0.65rem; border-radius: 100px;
-  font-size: 0.68rem; font-weight: 500;
-  background: #EEF2FF; color: var(--electric);
-}
+.tl-tag { padding: 0.2rem 0.65rem; border-radius: 100px; font-size: 0.68rem; font-weight: 500; background: #EEF2FF; color: var(--electric); }
 .tl-highlight {
   display: inline-flex; align-items: center; gap: 0.35rem;
   font-size: 0.75rem; font-weight: 600; color: var(--lime-dark);
-  background: #F7FEE7; padding: 0.25rem 0.65rem; border-radius: 100px;
-  margin-bottom: 0.75rem;
+  background: #F7FEE7; padding: 0.25rem 0.65rem; border-radius: 100px; margin-bottom: 0.75rem;
 }
 
-@media (max-width: 900px) {
-  .timeline-layout { grid-template-columns: 1fr; gap: 3rem; }
-}
-
-/* ANIMATIONS */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+@keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@keyframes numFloat {
-  0%, 100% { transform: translateY(-50%) rotate(0deg); }
-  50%       { transform: translateY(-52%) rotate(1deg); }
-}
-.reveal {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
-}
+@keyframes numFloat { 0%, 100% { transform: translateY(-50%) rotate(0deg); } 50% { transform: translateY(-52%) rotate(1deg); } }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
   nav { padding: 1.1rem 1.5rem; }
   .nav-links { display: none; }
@@ -442,10 +386,10 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .modules-grid { grid-template-columns: 1fr 1fr; }
   .modules-header { grid-template-columns: 1fr; gap: 1.5rem; }
-  .exp-grid { grid-template-columns: 1fr; }
   .hero-stats { gap: 2rem; }
   footer { padding: 2rem 1.5rem; }
   .cta-section { padding: 5rem 1.5rem; }
+  .timeline-layout { grid-template-columns: 1fr; gap: 3rem; }
 }
 @media (max-width: 600px) {
   .modules-grid { grid-template-columns: 1fr; }
@@ -456,7 +400,6 @@ footer {
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
   <div class="nav-logo">
     <div class="nav-logo-dot"></div>
@@ -472,7 +415,6 @@ footer {
   <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg-num">AI</div>
   <div class="hero-tag"><div class="hero-tag-dot"></div>Data &amp; AI Strategy · Barcelona</div>
@@ -493,7 +435,6 @@ footer {
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
     <div class="marquee-item">AI Governance</div><div class="marquee-item">Generative AI</div>
@@ -509,7 +450,6 @@ footer {
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-grid">
     <div>
@@ -541,40 +481,29 @@ footer {
   </div>
 </section>
 
-<!-- TIMELINE -->
 <section class="timeline-section" id="timeline">
   <div class="timeline-layout">
     <div>
       <div class="section-tag reveal">Career timeline</div>
       <h2 class="timeline-intro-headline reveal reveal-delay-1">10+ years.<br>Three <span>continents.</span><br>One mission.</h2>
-      <p class="timeline-intro-body reveal reveal-delay-2">
-        From financial analyst at Telefonica to UN data consultant in Geneva, to founding my own AI startup — every step has been about making data work harder for the people using it.
-      </p>
-
+      <p class="timeline-intro-body reveal reveal-delay-2">From financial analyst at Telefonica to UN data consultant in Geneva, to founding my own AI startup — every step has been about making data work harder for the people using it.</p>
       <div class="timeline-langs reveal reveal-delay-3">
         <span class="lang-pill native">🇪🇸 Spanish — Native</span>
         <span class="lang-pill native">🏴󠁥󠁳󠁣󠁴󠁿 Catalan — Native</span>
         <span class="lang-pill">🇬🇧 English — C2</span>
         <span class="lang-pill">🇫🇷 French — Working</span>
       </div>
-
       <div class="timeline-edu reveal reveal-delay-4">
         <div class="edu-label">Education</div>
         <div class="edu-items">
           <div class="edu-item">
             <div class="edu-item-icon">🎓</div>
-            <div>
-              <div class="edu-item-name">MSc Business Intelligence</div>
-              <div style="font-size:0.78rem;color:var(--mid)">University of Barcelona</div>
-            </div>
+            <div><div class="edu-item-name">MSc Business Intelligence</div><div style="font-size:0.78rem;color:var(--mid)">University of Barcelona</div></div>
             <div class="edu-item-year">2016–17</div>
           </div>
           <div class="edu-item">
             <div class="edu-item-icon">🎓</div>
-            <div>
-              <div class="edu-item-name">BSc Economics</div>
-              <div style="font-size:0.78rem;color:var(--mid)">Universitat Pompeu Fabra</div>
-            </div>
+            <div><div class="edu-item-name">BSc Economics</div><div style="font-size:0.78rem;color:var(--mid)">Universitat Pompeu Fabra</div></div>
             <div class="edu-item-year">2009–16</div>
           </div>
         </div>
@@ -582,164 +511,115 @@ footer {
     </div>
 
     <div class="tl reveal reveal-delay-2">
-
       <div class="tl-item active" onclick="toggleTl(this)">
         <div class="tl-dot"></div>
         <div class="tl-header">
           <div class="tl-top">
-            <div>
-              <div class="tl-org">SDG Group · Barcelona</div>
-              <div class="tl-role">Manager, Data &amp; AI Transformation</div>
-            </div>
+            <div><div class="tl-org">SDG Group · Barcelona</div><div class="tl-role">Manager, Data &amp; AI Transformation</div></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="tl-period">2025–Now</div>
               <div class="tl-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
-        <div class="tl-body">
-          <div class="tl-body-inner">
-            <div class="tl-highlight">⚡ ~40% task time reduction via GenAI</div>
-            <p class="tl-desc">Leading large-scale data and AI transformation programs for the insurance sector across Spain, Portugal, Colombia, and Brazil. Full delivery ownership, C-level advisory, and systematic GenAI integration across all workflows.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">GenAI</span><span class="tl-tag">Program management</span>
-              <span class="tl-tag">Insurance</span><span class="tl-tag">MLOps</span><span class="tl-tag">Agentic AI</span>
-            </div>
-          </div>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <div class="tl-highlight">⚡ ~40% task time reduction via GenAI</div>
+          <p class="tl-desc">Leading large-scale data and AI transformation programs for the insurance sector across Spain, Portugal, Colombia, and Brazil. Full delivery ownership, C-level advisory, and systematic GenAI integration across all workflows.</p>
+          <div class="tl-tags"><span class="tl-tag">GenAI</span><span class="tl-tag">Program management</span><span class="tl-tag">Insurance</span><span class="tl-tag">MLOps</span><span class="tl-tag">Agentic AI</span></div>
+        </div></div>
       </div>
 
       <div class="tl-item" onclick="toggleTl(this)">
         <div class="tl-dot"></div>
         <div class="tl-header">
           <div class="tl-top">
-            <div>
-              <div class="tl-org">United Nations · Geneva</div>
-              <div class="tl-role">Data Consultant</div>
-            </div>
+            <div><div class="tl-org">United Nations · Geneva</div><div class="tl-role">Data Consultant</div></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="tl-period">2022–2025</div>
               <div class="tl-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
-        <div class="tl-body">
-          <div class="tl-body-inner">
-            <div class="tl-highlight">🌍 International impact at scale</div>
-            <p class="tl-desc">Designed and implemented data quality and exception management processes. Built Power BI environments used across departments. Supported the migration of the data warehouse to Databricks and delivered data literacy training at scale.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Power BI</span><span class="tl-tag">Databricks</span>
-              <span class="tl-tag">Data governance</span><span class="tl-tag">Data literacy</span>
-            </div>
-          </div>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <div class="tl-highlight">🌍 International impact at scale</div>
+          <p class="tl-desc">Designed and implemented data quality and exception management processes. Built Power BI environments used across departments. Supported the migration of the data warehouse to Databricks and delivered data literacy training at scale.</p>
+          <div class="tl-tags"><span class="tl-tag">Power BI</span><span class="tl-tag">Databricks</span><span class="tl-tag">Data governance</span><span class="tl-tag">Data literacy</span></div>
+        </div></div>
       </div>
 
       <div class="tl-item" onclick="toggleTl(this)">
         <div class="tl-dot"></div>
         <div class="tl-header">
           <div class="tl-top">
-            <div>
-              <div class="tl-org">datalitiks · Malta</div>
-              <div class="tl-role">Founder &amp; CEO</div>
-            </div>
+            <div><div class="tl-org">datalitiks · Malta</div><div class="tl-role">Founder &amp; CEO</div></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="tl-period">2022–2024</div>
               <div class="tl-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
-        <div class="tl-body">
-          <div class="tl-body-inner">
-            <div class="tl-highlight">🚀 ~30% faster dev · ~40% lower content costs</div>
-            <p class="tl-desc">Founded an ESG data and analytics platform helping organisations measure and report on sustainability performance. Early GenAI adopter from day one — integrated ChatGPT into core workflows, enabling a lean team to deliver at a pace that would otherwise have required significantly more headcount.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Startup</span><span class="tl-tag">ESG</span>
-              <span class="tl-tag">GenAI</span><span class="tl-tag">Product strategy</span><span class="tl-tag">Data architecture</span>
-            </div>
-          </div>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <div class="tl-highlight">🚀 ~30% faster dev · ~40% lower content costs</div>
+          <p class="tl-desc">Founded an ESG data and analytics platform helping organisations measure and report on sustainability performance. Early GenAI adopter from day one — integrated ChatGPT into core workflows, enabling a lean team to deliver at a pace that would otherwise have required significantly more headcount.</p>
+          <div class="tl-tags"><span class="tl-tag">Startup</span><span class="tl-tag">ESG</span><span class="tl-tag">GenAI</span><span class="tl-tag">Product strategy</span><span class="tl-tag">Data architecture</span></div>
+        </div></div>
       </div>
 
       <div class="tl-item" onclick="toggleTl(this)">
         <div class="tl-dot"></div>
         <div class="tl-header">
           <div class="tl-top">
-            <div>
-              <div class="tl-org">Consulting · Malta</div>
-              <div class="tl-role">Head of Data Services &amp; Analytics</div>
-            </div>
+            <div><div class="tl-org">Consulting · Malta</div><div class="tl-role">Head of Data Services &amp; Analytics</div></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="tl-period">2021–2022</div>
               <div class="tl-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
-        <div class="tl-body">
-          <div class="tl-body-inner">
-            <p class="tl-desc">Designed analytics frameworks and reporting solutions across multiple business functions, driving self-service adoption. Led cross-functional collaboration between business stakeholders and technical teams.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Analytics</span><span class="tl-tag">BI</span><span class="tl-tag">Self-service</span>
-            </div>
-          </div>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Designed analytics frameworks and reporting solutions across multiple business functions, driving self-service adoption. Led cross-functional collaboration between business stakeholders and technical teams.</p>
+          <div class="tl-tags"><span class="tl-tag">Analytics</span><span class="tl-tag">BI</span><span class="tl-tag">Self-service</span></div>
+        </div></div>
       </div>
 
       <div class="tl-item" onclick="toggleTl(this)">
         <div class="tl-dot"></div>
         <div class="tl-header">
           <div class="tl-top">
-            <div>
-              <div class="tl-org">GO plc · Malta</div>
-              <div class="tl-role">Data Insights Manager</div>
-            </div>
+            <div><div class="tl-org">GO plc · Malta</div><div class="tl-role">Data Insights Manager</div></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="tl-period">2016–2021</div>
               <div class="tl-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
-        <div class="tl-body">
-          <div class="tl-body-inner">
-            <div class="tl-highlight">📊 Hundreds of BI users across the org</div>
-            <p class="tl-desc">4+ years of progressive growth within Malta's major telco group — from Customer Analytics Specialist to leading the organisation's analytics adoption at scale. Implemented Power BI environments, led data monetisation initiatives, and developed BI dashboards serving multiple departments simultaneously.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Power BI</span><span class="tl-tag">Telco</span>
-              <span class="tl-tag">Customer analytics</span><span class="tl-tag">Data monetisation</span>
-            </div>
-          </div>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <div class="tl-highlight">📊 Hundreds of BI users across the org</div>
+          <p class="tl-desc">4+ years of progressive growth within Malta's major telco group — from Customer Analytics Specialist to leading the organisation's analytics adoption at scale. Implemented Power BI environments, led data monetisation initiatives, and developed BI dashboards serving multiple departments simultaneously.</p>
+          <div class="tl-tags"><span class="tl-tag">Power BI</span><span class="tl-tag">Telco</span><span class="tl-tag">Customer analytics</span><span class="tl-tag">Data monetisation</span></div>
+        </div></div>
       </div>
 
       <div class="tl-item" onclick="toggleTl(this)">
         <div class="tl-dot"></div>
         <div class="tl-header">
           <div class="tl-top">
-            <div>
-              <div class="tl-org">Telefonica · Barcelona</div>
-              <div class="tl-role">Financial Analyst</div>
-            </div>
+            <div><div class="tl-org">Telefonica · Barcelona</div><div class="tl-role">Financial Analyst</div></div>
             <div style="display:flex;align-items:center;gap:0.5rem">
               <div class="tl-period">2015–2016</div>
               <div class="tl-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4l5 6 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             </div>
           </div>
         </div>
-        <div class="tl-body">
-          <div class="tl-body-inner">
-            <p class="tl-desc">Supported financial performance analysis and reporting within a multinational telecommunications environment. The starting point of a career that would evolve from finance into data, AI, and strategy leadership.</p>
-            <div class="tl-tags">
-              <span class="tl-tag">Finance</span><span class="tl-tag">Telco</span><span class="tl-tag">Reporting</span>
-            </div>
-          </div>
-        </div>
+        <div class="tl-body"><div class="tl-body-inner">
+          <p class="tl-desc">Supported financial performance analysis and reporting within a multinational telecommunications environment. The starting point of a career that would evolve from finance into data, AI, and strategy leadership.</p>
+          <div class="tl-tags"><span class="tl-tag">Finance</span><span class="tl-tag">Telco</span><span class="tl-tag">Reporting</span></div>
+        </div></div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- MODULES -->
 <section class="modules" id="modules">
   <div class="modules-header">
     <div>
@@ -749,62 +629,60 @@ footer {
     <p class="modules-intro reveal reveal-delay-2">Each module draws from real engagements — the UN, Allianz, a GenAI-powered startup. Frameworks you can use on Monday morning.</p>
   </div>
   <div class="modules-grid">
-    <div class="module-card reveal">
+    <a href="module-01.html" class="module-card reveal" style="cursor:pointer">
       <div class="module-num">Module 01</div>
       <div class="module-header"><div class="module-icon mi-1">⚡</div><div class="module-title">GenAI Foundations</div></div>
       <p class="module-desc">Cut through the hype. Understand what generative AI actually is, where it creates real business value, and how to adopt it before your competitors do.</p>
-      <span class="module-badge badge-soon">Coming soon</span>
-    </div>
-    <div class="module-card reveal reveal-delay-1">
+      <span class="module-badge badge-live">Live</span>
+    </a>
+    <a href="module-02.html" class="module-card reveal reveal-delay-1" style="cursor:pointer">
       <div class="module-num">Module 02</div>
       <div class="module-header"><div class="module-icon mi-2">🏛</div><div class="module-title">AI Governance &amp; Strategy</div></div>
       <p class="module-desc">Build governance that enables innovation. Risk frameworks, data ownership, regulatory readiness — and how to get board-level buy-in.</p>
-      <span class="module-badge badge-soon">Coming soon</span>
-    </div>
-    <div class="module-card reveal reveal-delay-2">
+      <span class="module-badge badge-live">Live</span>
+    </a>
+    <a href="module-03.html" class="module-card reveal reveal-delay-2" style="cursor:pointer">
       <div class="module-num">Module 03</div>
       <div class="module-header"><div class="module-icon mi-3">🤖</div><div class="module-title">Agentic AI &amp; Automation</div></div>
       <p class="module-desc">Beyond chatbots: designing agentic systems that run real workflows. Architecture, orchestration, and governance from live deployments.</p>
-      <span class="module-badge badge-soon">Coming soon</span>
-    </div>
-    <div class="module-card reveal reveal-delay-1">
+      <span class="module-badge badge-live">Live</span>
+    </a>
+    <a href="module-04.html" class="module-card reveal reveal-delay-1" style="cursor:pointer">
       <div class="module-num">Module 04</div>
       <div class="module-header"><div class="module-icon mi-4">🏗</div><div class="module-title">Data Platform Modernisation</div></div>
       <p class="module-desc">From legacy warehouse to cloud-native. Migration playbooks, stakeholder alignment, and maintaining trust in data during transitions.</p>
-      <span class="module-badge badge-soon">Coming soon</span>
-    </div>
-    <div class="module-card reveal reveal-delay-2">
+      <span class="module-badge badge-live">Live</span>
+    </a>
+    <a href="module-05.html" class="module-card reveal reveal-delay-2" style="cursor:pointer">
       <div class="module-num">Module 05</div>
       <div class="module-header"><div class="module-icon mi-5">⚙️</div><div class="module-title">MLOps in Practice</div></div>
       <p class="module-desc">Operationalising ML is an organisational problem, not just a technical one. Pipelines, monitoring, and bridging data science with business outcomes.</p>
-      <span class="module-badge badge-soon">Coming soon</span>
-    </div>
-    <div class="module-card reveal reveal-delay-3">
+      <span class="module-badge badge-live">Live</span>
+    </a>
+    <a href="module-06.html" class="module-card reveal reveal-delay-3" style="cursor:pointer">
       <div class="module-num">Module 06</div>
       <div class="module-header"><div class="module-icon mi-6">🌱</div><div class="module-title">ESG &amp; AI</div></div>
       <p class="module-desc">Turning sustainability reporting from compliance exercise into competitive advantage. Built from direct experience founding an ESG analytics platform.</p>
-      <span class="module-badge badge-soon">Coming soon</span>
-    </div>
+      <span class="module-badge badge-live">Live</span>
+    </a>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section" id="contact">
   <h2 class="cta-headline reveal">Ready to lead<br>with <span>AI?</span></h2>
-  <p class="cta-sub reveal reveal-delay-1">The hub launches soon. Get in touch for early access to modules, case studies, and the AI readiness framework.</p>
+  <p class="cta-sub reveal reveal-delay-1">Get in touch for conversations about data transformation, AI strategy, and what it takes to make these programs actually work.</p>
   <a href="mailto:anarubioherrera@hotmail.com" class="btn-white reveal reveal-delay-2">
     Get in touch
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">AI Leadership Hub</div>
   <ul class="footer-links">
     <li><a href="https://linkedin.com/in/anarubioherrera" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="mailto:anarubioherrera@hotmail.com">Email</a></li>
-    <li><a href="#modules">Learning Hub</a></li>
+    <li><a href="learning-hub.html">Learning Hub</a></li>
   </ul>
   <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
 </footer>
