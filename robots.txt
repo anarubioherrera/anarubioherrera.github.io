@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anarubioherrera.github.io/sitemap.xml
