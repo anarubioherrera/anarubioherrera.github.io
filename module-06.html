@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Module 06: ESG & AI — AI Leadership Hub</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16; --lime-dark: #4D7C0F;
+  --white: #FAFAF9; --off: #F5F5F4; --ink: #1C1917; --mid: #78716C; --border: #E7E5E4;
+  --green: #16A34A; --green-light: #DCFCE7; --green-dark: #14532D;
+  --f-display: 'Syne', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 0.6rem; }
+.nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--electric); animation: blink 2.5s ease-in-out infinite; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-cta { background: var(--electric); color: #fff; padding: 0.55rem 1.35rem; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px; transition: background 0.2s; }
+.nav-cta:hover { background: #4338CA; }
+
+.module-hero { padding: 9rem 3rem 5rem; background: var(--green-dark); color: var(--white); position: relative; overflow: hidden; }
+.module-hero::after { content: '06'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: var(--f-display); font-size: clamp(12rem, 22vw, 22rem); font-weight: 800; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; user-select: none; line-height: 1; }
+.module-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.4); margin-bottom: 1.5rem; }
+.module-breadcrumb a { color: var(--lime); transition: color 0.2s; }
+.module-breadcrumb span { opacity: 0.3; }
+.module-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(132,204,22,0.2); color: var(--lime); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 600; margin-bottom: 1.5rem; }
+.module-hero h1 { font-family: var(--f-display); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; max-width: 700px; margin-bottom: 1.5rem; position: relative; }
+.module-hero h1 span { color: var(--lime); }
+.module-hero-sub { font-size: 1.05rem; color: rgba(250,250,249,0.65); max-width: 580px; line-height: 1.75; margin-bottom: 3rem; position: relative; }
+.module-meta { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; }
+.meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+.meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,250,249,0.35); }
+.meta-val { font-size: 0.9rem; font-weight: 500; color: rgba(250,250,249,0.85); }
+
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--lime); z-index: 200; width: 0%; }
+.module-layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; gap: 5rem; align-items: start; }
+.sidebar { position: sticky; top: 6rem; }
+.sidebar-label { font-family: var(--f-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; }
+.sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+.sidebar-nav a { display: block; padding: 0.5rem 0.75rem; font-size: 0.82rem; color: var(--mid); border-radius: 6px; border-left: 2px solid transparent; transition: color 0.2s, border-color 0.2s, background 0.2s; line-height: 1.4; }
+.sidebar-nav a:hover { color: var(--ink); background: var(--off); }
+.sidebar-nav a.active { color: var(--green); border-left-color: var(--green); background: var(--green-light); font-weight: 600; }
+.sidebar-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+.sidebar-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--mid); padding: 0.4rem 0; transition: color 0.2s; }
+.sidebar-back:hover { color: var(--electric); }
+
+.module-content { max-width: 680px; }
+.content-section { margin-bottom: 5rem; scroll-margin-top: 7rem; }
+.section-num { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-num::before { content: ''; width: 20px; height: 2px; background: var(--lime); border-radius: 2px; }
+.content-section h2 { font-family: var(--f-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+.content-section p { color: var(--mid); line-height: 1.85; margin-bottom: 1.25rem; font-size: 1rem; }
+.content-section p strong { color: var(--ink); font-weight: 600; }
+
+.callout { background: #F0FDF4; border-left: 3px solid var(--green); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; }
+.callout p { color: var(--green-dark); margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+.callout-warning { background: #FFFBEB; border-left: 3px solid #F59E0B; border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-warning .callout-label { color: #92400E; }
+.callout-warning p { color: #78350F; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+.callout-blue { background: #EEF2FF; border-left: 3px solid var(--electric); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+.callout-blue .callout-label { color: var(--electric); }
+.callout-blue p { color: #3730A3; margin-bottom: 0; font-size: 0.95rem; line-height: 1.7; }
+
+.real-world { background: var(--green-dark); border-radius: 16px; padding: 1.75rem 2rem; margin: 2rem 0; color: var(--white); }
+.real-world-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.75rem; }
+.real-world p { color: rgba(250,250,249,0.7); font-size: 0.95rem; line-height: 1.75; margin-bottom: 0; }
+.real-world p strong { color: var(--white); }
+
+.takeaways { background: var(--off); border-radius: 16px; padding: 1.75rem 2rem; margin: 2.5rem 0; }
+.takeaways-label { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.takeaways-label::before { content: '✦'; font-size: 0.6rem; color: var(--lime); }
+.takeaway-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.takeaway-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+.takeaway-list li::before { content: '→'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+
+.esg-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+.esg-pillar { border-radius: 12px; padding: 1.5rem 1.25rem; text-align: center; }
+.esg-e { background: #F0FDF4; border: 1.5px solid #BBF7D0; }
+.esg-s { background: #EEF2FF; border: 1.5px solid #C7D2FE; }
+.esg-g { background: #FEF3C7; border: 1.5px solid #FDE68A; }
+.esg-pillar-letter { font-family: var(--f-display); font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 0.4rem; }
+.esg-e .esg-pillar-letter { color: var(--green); }
+.esg-s .esg-pillar-letter { color: var(--electric); }
+.esg-g .esg-pillar-letter { color: #92400E; }
+.esg-pillar-title { font-family: var(--f-display); font-size: 0.82rem; font-weight: 700; margin-bottom: 0.5rem; }
+.esg-pillar-items { font-size: 0.78rem; color: var(--mid); line-height: 1.6; }
+
+.ai-use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+.ai-use-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s; }
+.ai-use-card:hover { border-color: var(--green); }
+.ai-use-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.ai-use-title { font-family: var(--f-display); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.35rem; }
+.ai-use-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
+
+.reg-table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.88rem; }
+.reg-table th { font-family: var(--f-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.75rem 1rem; text-align: left; background: var(--off); border-bottom: 2px solid var(--border); }
+.reg-table th:first-child { border-radius: 8px 0 0 0; }
+.reg-table th:last-child { border-radius: 0 8px 0 0; }
+.reg-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border); color: var(--mid); vertical-align: top; line-height: 1.5; }
+.reg-table td:first-child { font-weight: 600; color: var(--ink); }
+.reg-table tr:last-child td { border-bottom: none; }
+.reg-table tr:hover td { background: var(--off); }
+
+/* Completion banner */
+.completion-banner {
+  background: linear-gradient(135deg, var(--green-dark) 0%, #1a3a2a 100%);
+  border-radius: 16px; padding: 2.5rem; margin-top: 4rem;
+  text-align: center; color: var(--white); position: relative; overflow: hidden;
+}
+.completion-banner::before {
+  content: '✦'; position: absolute; font-size: 8rem; opacity: 0.04;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--f-display);
+}
+.completion-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.completion-title { font-family: var(--f-display); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem; color: var(--white); }
+.completion-title span { color: var(--lime); }
+.completion-sub { color: rgba(250,250,249,0.65); max-width: 460px; margin: 0 auto 2rem; line-height: 1.75; font-size: 0.95rem; }
+.completion-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-lime { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--lime); color: var(--green-dark); padding: 0.85rem 1.75rem; border-radius: 8px; font-family: var(--f-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; transition: transform 0.2s; }
+.btn-lime:hover { transform: translateY(-2px); }
+.btn-ghost-white { display: inline-flex; align-items: center; gap: 0.5rem; border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); padding: 0.85rem 1.75rem; border-radius: 8px; font-family: var(--f-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; transition: border-color 0.2s, transform 0.2s; }
+.btn-ghost-white:hover { border-color: var(--lime); transform: translateY(-2px); }
+
+.prev-next { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.prev-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; transition: border-color 0.2s, color 0.2s; }
+.prev-link:hover { border-color: var(--ink); color: var(--ink); }
+
+footer { background: var(--ink); color: var(--white); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+.footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1.1rem 1.5rem; } .nav-links { display: none; }
+  .module-hero { padding: 7rem 1.5rem 4rem; }
+  .module-layout { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 0; }
+  .sidebar { display: none; }
+  .esg-pillars { grid-template-columns: 1fr; }
+  .ai-use-grid { grid-template-columns: 1fr; }
+  .completion-actions { flex-direction: column; align-items: center; }
+  footer { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>AI Leadership Hub</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="learning-hub.html" class="active">Learning Hub</a></li>
+    <li><a href="index.html#timeline">Career</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="module-hero">
+  <div class="module-breadcrumb">
+    <a href="learning-hub.html">Learning Hub</a><span>›</span>Module 06
+  </div>
+  <div class="module-tag">🌱 ESG &amp; AI</div>
+  <h1>Sustainability reporting<br>as a <span>competitive</span><br>advantage.</h1>
+  <p class="module-hero-sub">ESG has moved from compliance checkbox to strategic differentiator. AI is the technology that makes the difference between organisations that report on sustainability and those that actually manage it.</p>
+  <div class="module-meta">
+    <div class="meta-item"><span class="meta-label">Reading time</span><span class="meta-val">~15 min</span></div>
+    <div class="meta-item"><span class="meta-label">Level</span><span class="meta-val">All levels</span></div>
+    <div class="meta-item"><span class="meta-label">Module</span><span class="meta-val">06 of 06</span></div>
+    <div class="meta-item"><span class="meta-label">By</span><span class="meta-val">Ana Rubio Herrera</span></div>
+  </div>
+</div>
+
+<div class="module-layout">
+  <aside class="sidebar">
+    <div class="sidebar-label">In this module</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s1" class="active">ESG today</a></li>
+      <li><a href="#s2">The data challenge</a></li>
+      <li><a href="#s3">Where AI adds value</a></li>
+      <li><a href="#s4">Regulatory landscape</a></li>
+      <li><a href="#s5">From reporting to strategy</a></li>
+      <li><a href="#s6">datalitiks — lessons learned</a></li>
+    </ul>
+    <div class="sidebar-divider"></div>
+    <a href="module-05.html" class="sidebar-back">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Previous: MLOps
+    </a>
+  </aside>
+
+  <article class="module-content">
+    <div class="prev-next">
+      <a href="module-05.html" class="prev-link">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M9 6H3M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Module 05: MLOps
+      </a>
+    </div>
+
+    <div class="content-section reveal" id="s1">
+      <div class="section-num">01</div>
+      <h2>ESG today — why it can no longer be ignored</h2>
+      <p>A decade ago, ESG — Environmental, Social, and Governance — was a niche concern, mostly relevant for large listed companies responding to investor questionnaires. Today, it has become a fundamental dimension of how organisations are evaluated, financed, and regulated.</p>
+      <p><strong>Investors, regulators, customers, and employees are all asking the same question: is this organisation managing its impact on the world responsibly?</strong> And increasingly, they want data to answer it — not narrative, not pledges, but structured, auditable, comparable data.</p>
+
+      <div class="esg-pillars">
+        <div class="esg-pillar esg-e">
+          <div class="esg-pillar-letter">E</div>
+          <div class="esg-pillar-title">Environmental</div>
+          <div class="esg-pillar-items">Carbon emissions · Energy use · Water · Waste · Biodiversity · Climate risk</div>
+        </div>
+        <div class="esg-pillar esg-s">
+          <div class="esg-pillar-letter">S</div>
+          <div class="esg-pillar-title">Social</div>
+          <div class="esg-pillar-items">Labour practices · Diversity · Human rights · Community impact · Supply chain</div>
+        </div>
+        <div class="esg-pillar esg-g">
+          <div class="esg-pillar-letter">G</div>
+          <div class="esg-pillar-title">Governance</div>
+          <div class="esg-pillar-items">Board structure · Executive pay · Anti-corruption · Transparency · Risk oversight</div>
+        </div>
+      </div>
+
+      <p>The organisations that treat ESG as a reporting obligation — something to do once a year to satisfy regulators — are missing the point. <strong>ESG data, properly collected and analysed, is a management tool.</strong> It tells you where your operational risks are, where your supply chain is exposed, and where you have genuine competitive differentiation.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>ESG is no longer optional — regulatory requirements, investor pressure, and customer expectations have made it a baseline requirement for most organisations.</li>
+          <li>The organisations winning on ESG are those treating it as a management discipline, not a compliance exercise.</li>
+          <li>Data quality is the foundation. Greenwashing risk is highest where data is weakest.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s2">
+      <div class="section-num">02</div>
+      <h2>The ESG data challenge — why it's hard</h2>
+      <p>ESG reporting sounds straightforward until you try to do it. The data challenges are significant — and they're the reason most organisations struggle to produce ESG reports that are accurate, timely, and defensible.</p>
+
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Data fragmentation</div>
+        <p>ESG data lives everywhere: energy bills, HR systems, supplier questionnaires, logistics platforms, financial systems, facility management tools. <strong>No single system contains everything you need.</strong> Aggregating it manually is error-prone and takes months.</p>
+      </div>
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Inconsistent standards</div>
+        <p>GRI, CSRD, TCFD, SASB, CDP, UN SDGs — the alphabet soup of ESG frameworks is genuinely overwhelming. Different stakeholders want different things. <strong>Maintaining multiple reporting frameworks from a single data source requires deliberate architecture.</strong></p>
+      </div>
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Supply chain opacity</div>
+        <p>For most organisations, Scope 3 emissions — those in the value chain, not under direct control — represent 70–90% of their carbon footprint. But they depend on suppliers providing accurate data, which most don't. <strong>Supply chain ESG data is the hardest problem in the field.</strong></p>
+      </div>
+      <div class="callout-warning">
+        <div class="callout-label">⚠ Audit trail requirements</div>
+        <p>As ESG reporting becomes mandatory and legally binding, the data needs to be auditable. That means knowing exactly where every number came from, when it was collected, and who verified it. Manual Excel-based processes cannot provide this.</p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>ESG data is fundamentally a data integration and quality problem — the same disciplines that apply to any data platform apply here.</li>
+          <li>Multi-framework reporting from a single source is the architecture goal — collect once, report many times.</li>
+          <li>Audit trail requirements mean manual processes are not a long-term solution. Invest in structured data collection early.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s3">
+      <div class="section-num">03</div>
+      <h2>Where AI adds real value in ESG</h2>
+      <p>AI doesn't solve the ESG data problem — but it dramatically accelerates your ability to work with ESG data once the foundation is in place. Here are the areas where the value is clearest.</p>
+
+      <div class="ai-use-grid">
+        <div class="ai-use-card">
+          <div class="ai-use-icon">🔍</div>
+          <div class="ai-use-title">Data extraction &amp; structuring</div>
+          <div class="ai-use-desc">GenAI can extract ESG-relevant data from unstructured sources — supplier PDFs, sustainability reports, news articles — and structure it into comparable formats. Tasks that took analysts days now take minutes.</div>
+        </div>
+        <div class="ai-use-card">
+          <div class="ai-use-icon">📊</div>
+          <div class="ai-use-title">Emissions estimation</div>
+          <div class="ai-use-desc">ML models can estimate Scope 3 emissions where direct data is unavailable, using spend data, activity data, and sector benchmarks. Imperfect but far better than zero.</div>
+        </div>
+        <div class="ai-use-card">
+          <div class="ai-use-icon">⚠️</div>
+          <div class="ai-use-title">Supply chain risk detection</div>
+          <div class="ai-use-desc">AI systems monitoring news, regulatory databases, and supplier signals to detect ESG risks — labour violations, environmental incidents, governance issues — before they become crises.</div>
+        </div>
+        <div class="ai-use-card">
+          <div class="ai-use-icon">📝</div>
+          <div class="ai-use-title">Report generation</div>
+          <div class="ai-use-desc">GenAI dramatically accelerates the narrative writing component of ESG reports — drafting section content from structured data, adapting to different frameworks and audiences.</div>
+        </div>
+        <div class="ai-use-card">
+          <div class="ai-use-icon">🎯</div>
+          <div class="ai-use-title">Target setting &amp; scenario modelling</div>
+          <div class="ai-use-desc">ML models simulating the impact of different operational decisions on ESG metrics — helping organisations set realistic targets and understand the trade-offs.</div>
+        </div>
+        <div class="ai-use-card">
+          <div class="ai-use-icon">✅</div>
+          <div class="ai-use-title">Consistency checking</div>
+          <div class="ai-use-desc">AI systems cross-checking ESG disclosures against regulatory requirements and flagging inconsistencies, omissions, or potential greenwashing risks before publication.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">The honest caveat</div>
+        <p>AI amplifies ESG capability — but it does not create it. <strong>An AI system applied to bad ESG data produces bad ESG insights faster.</strong> The data foundation must come first. AI is the accelerant, not the foundation.</p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>GenAI is most immediately useful for data extraction, report drafting, and consistency checking — low barrier to entry, high time savings.</li>
+          <li>ML adds value for estimation, risk detection, and scenario modelling — higher investment, higher strategic value.</li>
+          <li>Fix the data foundation before applying AI. AI on bad data produces confident-sounding wrong answers.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s4">
+      <div class="section-num">04</div>
+      <h2>The regulatory landscape — what's coming</h2>
+      <p>The regulatory environment for ESG is moving faster than most organisations' ability to respond. Here is a practical map of the key frameworks affecting European organisations.</p>
+
+      <table class="reg-table">
+        <thead>
+          <tr><th>Framework</th><th>Who it applies to</th><th>Key requirement</th><th>Timeline</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CSRD</td>
+            <td>Large EU companies (~50,000 companies phased)</td>
+            <td>Mandatory sustainability reporting under ESRS standards, third-party assurance required</td>
+            <td>2024–2028 phased</td>
+          </tr>
+          <tr>
+            <td>EU Taxonomy</td>
+            <td>Large EU companies with NFRD obligations</td>
+            <td>Classify economic activities as environmentally sustainable, disclose alignment</td>
+            <td>In force</td>
+          </tr>
+          <tr>
+            <td>SFDR</td>
+            <td>Financial market participants in EU</td>
+            <td>Disclose sustainability risks and impacts in investment products</td>
+            <td>In force</td>
+          </tr>
+          <tr>
+            <td>TCFD</td>
+            <td>Varies by jurisdiction; increasingly mandatory</td>
+            <td>Disclose climate-related financial risks across four pillars</td>
+            <td>In force / expanding</td>
+          </tr>
+          <tr>
+            <td>GRI Standards</td>
+            <td>Voluntary but widely used globally</td>
+            <td>Comprehensive sustainability disclosure framework, sector-specific standards</td>
+            <td>Ongoing updates</td>
+          </tr>
+          <tr>
+            <td>CSDDD</td>
+            <td>Large EU and non-EU companies operating in EU</td>
+            <td>Due diligence on human rights and environmental impacts across value chain</td>
+            <td>2027 onwards</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-blue">
+        <div class="callout-label">The CSRD shift</div>
+        <p>The Corporate Sustainability Reporting Directive is the most significant ESG regulatory development for European organisations in decades. It moves sustainability reporting from voluntary best practice to mandatory, audited disclosure — with the same rigour as financial reporting. <strong>If your organisation is in scope, the time to prepare your data infrastructure is now, not the year before your first filing.</strong></p>
+      </div>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>CSRD is the defining ESG regulation for European organisations — understand your scope and timeline now.</li>
+          <li>The data infrastructure requirements of CSRD cannot be built in 6 months. Start the architecture work 2–3 years before your first mandatory filing.</li>
+          <li>Third-party assurance requirements mean your ESG data needs to be auditable — not just reported.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s5">
+      <div class="section-num">05</div>
+      <h2>From compliance to competitive advantage</h2>
+      <p>The organisations that treat ESG as a compliance burden will spend significant resources producing reports that satisfy regulators but create no strategic value. The organisations that treat ESG as a management discipline will do something different.</p>
+      <p>They will use ESG data to make better operational decisions — identifying where energy waste is highest, where supply chain exposure is concentrated, where workforce practices create retention risk. <strong>The same data that goes into a sustainability report can also drive operational improvement, if the data infrastructure is built correctly.</strong></p>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 The strategic ESG data architecture</div>
+        <p>The organisations extracting strategic value from ESG data share a common architecture principle: <strong>collect ESG data at the operational level, not just for reporting.</strong> Energy data collected monthly for a carbon report is also operational data that can trigger efficiency interventions in real time. Supplier ESG scores collected for CSRD compliance are also procurement risk signals. The data is the same — the difference is whether the infrastructure is built to use it operationally or just to report it annually.</p>
+      </div>
+
+      <p>This is the shift I championed at datalitiks under the "Data for Good" concept: <strong>ESG data is not a reporting output — it's a strategic input.</strong> The organisations that internalise this will have a genuine competitive advantage as ESG requirements intensify and data quality becomes a differentiator.</p>
+
+      <div class="takeaways">
+        <div class="takeaways-label">Key takeaway</div>
+        <ul class="takeaway-list">
+          <li>Build ESG data infrastructure to serve operational decisions, not just annual reports — the marginal cost of doing both is low.</li>
+          <li>ESG data quality will become a competitive differentiator as mandatory assurance requirements raise the bar for everyone.</li>
+          <li>The "Data for Good" principle: sustainability goals and data excellence reinforce each other — organisations with better data make better sustainability decisions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-section reveal" id="s6">
+      <div class="section-num">06</div>
+      <h2>datalitiks — lessons from building an ESG AI platform</h2>
+      <p>This module is the most personal one in the Learning Hub, because it comes directly from founding and running datalitiks — an ESG data and analytics platform built from scratch in Malta between 2022 and 2024.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 What we built — and what we learned</div>
+        <p>datalitiks was built on a simple premise: organisations needed a way to transform fragmented ESG data into structured, actionable insights — and they needed it to work across multiple reporting frameworks simultaneously. The platform collected ESG data from multiple operational sources, structured it against GRI, UN SDGs, and sector-specific standards, and produced reporting-ready outputs.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 The GenAI advantage — early and deliberate</div>
+        <p>We integrated ChatGPT from week one — not as an experiment, but as a core part of how we built and operated the platform. <strong>The results were transformative for a lean team:</strong> ~30% faster platform development, ~40% lower content production costs, and the ability to deliver the equivalent of a much larger team's output. The key was integrating AI into every workflow systematically — content production, platform development, client communication, framework analysis — rather than using it occasionally for one-off tasks.</p>
+      </div>
+
+      <div class="real-world">
+        <div class="real-world-label">📍 The hardest lessons</div>
+        <p>Three things I would do differently. First: <strong>data standardisation is harder than it looks.</strong> Getting clients to provide ESG data in a consistent, structured format required more change management than technical work. Second: <strong>regulatory requirements move faster than product roadmaps.</strong> CSRD scope and requirements shifted significantly during our development period — build flexibility into your data architecture. Third: <strong>the market education burden is significant.</strong> In 2022, most organisations did not yet understand why they needed structured ESG data. That has changed dramatically — but early movers in this space need patience.</p>
+      </div>
+
+      <!-- COMPLETION BANNER -->
+      <div class="completion-banner">
+        <div class="completion-icon">🎓</div>
+        <div class="completion-title">Learning Hub <span>complete.</span></div>
+        <p class="completion-sub">You've worked through all six modules — from GenAI Foundations to ESG & AI. The next step is applying these frameworks in your own organisation.</p>
+        <div class="completion-actions">
+          <a href="learning-hub.html" class="btn-lime">
+            Review all modules
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="mailto:anarubioherrera@hotmail.com" class="btn-ghost-white">
+            Get in touch
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <div class="footer-logo">AI Leadership Hub</div>
+  <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + '%';
+}, { passive: true });
+document.querySelectorAll('.content-section').forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' }).observe(s);
+});
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 }).observe(el);
+});
+</script>
+</body>
+</html>
