@@ -10,102 +10,117 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
 <style>
 :root {
-  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16;
+  --electric: #4F46E5; --electric-light: #818CF8; --lime: #84CC16; --lime-dark: #4D7C0F;
   --white: #FAFAF9; --off: #F5F5F4; --ink: #1C1917; --mid: #78716C; --border: #E7E5E4;
   --f-display: 'Syne', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--white); color: var(--ink); font-family: var(--f-body); -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border);
-}
-.nav-logo {
-  font-family: var(--f-display); font-size: 0.85rem; font-weight: 700;
-  letter-spacing: 0.04em; text-transform: uppercase;
-  display: flex; align-items: center; gap: 0.6rem;
-}
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: var(--white); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: flex; align-items: center; gap: 0.6rem; }
 .nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--electric); animation: blink 2.5s ease-in-out infinite; }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--mid); transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--ink); }
-.nav-cta {
-  background: var(--electric); color: #fff; padding: 0.55rem 1.35rem;
-  font-family: var(--f-display); font-size: 0.78rem; font-weight: 700;
-  letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px;
-}
+.nav-cta { background: var(--electric); color: #fff; padding: 0.55rem 1.35rem; font-family: var(--f-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 100px; transition: background 0.2s; }
 .nav-cta:hover { background: #4338CA; }
 
-.page {
-  min-height: 100svh; padding: 12rem 3rem 7rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; position: relative; overflow: hidden; background: var(--ink);
-}
-.page-bg {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  font-family: var(--f-display); font-size: clamp(10rem, 22vw, 22rem); font-weight: 800;
-  color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.06);
-  white-space: nowrap; pointer-events: none; user-select: none;
-}
-.page-tag {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(79,70,229,0.2); color: var(--electric-light);
-  padding: 0.4rem 1rem; border-radius: 100px;
-  font-size: 0.78rem; font-weight: 500; margin-bottom: 2rem;
-}
-.page-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--electric-light); animation: blink 2s ease-in-out infinite; }
-h1 {
-  font-family: var(--f-display); font-size: clamp(2.8rem, 5vw, 5.5rem);
-  font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; color: #FAFAF9;
-  margin-bottom: 1.5rem; position: relative;
-}
-h1 span { color: var(--lime); }
-.page-sub {
-  font-size: 1.05rem; color: rgba(250,250,249,0.55); max-width: 500px;
-  line-height: 1.75; margin-bottom: 3rem; position: relative;
-}
-.topics-preview {
-  display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
-  max-width: 600px; margin-bottom: 3rem; position: relative;
-}
-.topic-pill {
-  padding: 0.45rem 1rem; border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.12);
-  font-size: 0.78rem; font-weight: 500; color: rgba(250,250,249,0.6);
-  transition: border-color 0.2s, color 0.2s;
-}
-.topic-pill:hover { border-color: var(--lime); color: var(--lime); }
-.btn-back {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; color: #FAFAF9;
-  padding: 0.85rem 1.75rem; font-family: var(--f-display);
-  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-  transition: border-color 0.2s, transform 0.2s; position: relative;
-}
-.btn-back:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+.page-hero { padding: 9rem 3rem 6rem; background: var(--ink); color: var(--white); position: relative; overflow: hidden; }
+.page-hero::after { content: 'BLOG'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%); font-family: var(--f-display); font-size: clamp(8rem, 16vw, 16rem); font-weight: 800; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; user-select: none; line-height: 1; }
+.page-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(79,70,229,0.25); color: var(--electric-light); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 600; margin-bottom: 1.5rem; }
+.page-hero h1 { font-family: var(--f-display); font-size: clamp(2.8rem, 5.5vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; max-width: 700px; margin-bottom: 1.5rem; position: relative; }
+.page-hero h1 span { color: var(--lime); }
+.page-hero-sub { font-size: 1.05rem; color: rgba(250,250,249,0.6); max-width: 540px; line-height: 1.75; position: relative; }
 
-footer {
-  background: #111; color: var(--white); padding: 2rem 3rem;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
-}
+.blog-layout { max-width: 1000px; margin: 0 auto; padding: 6rem 3rem; display: grid; grid-template-columns: 1fr 280px; gap: 5rem; align-items: start; }
+.posts { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.post-featured { border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; cursor: pointer; }
+.post-featured:hover { border-color: var(--electric); transform: translateY(-3px); }
+.post-featured-header { background: var(--electric); padding: 2.5rem; position: relative; overflow: hidden; }
+.post-featured-header::after { content: '01'; position: absolute; right: -1rem; top: 50%; transform: translateY(-50%); font-family: var(--f-display); font-size: 8rem; font-weight: 800; color: rgba(255,255,255,0.06); pointer-events: none; line-height: 1; }
+.post-featured-tag { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); color: #fff; padding: 0.3rem 0.75rem; border-radius: 100px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem; }
+.post-featured-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
+.post-featured h2 { font-family: var(--f-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; line-height: 1.15; color: #fff; letter-spacing: -0.01em; position: relative; }
+.post-featured-body { padding: 2rem 2.5rem; }
+.post-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.post-meta span { font-size: 0.75rem; color: var(--mid); }
+.post-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+.post-excerpt { font-size: 0.95rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.5rem; }
+.post-read-more { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--electric); transition: gap 0.2s; }
+.post-featured:hover .post-read-more { gap: 0.75rem; }
+
+.post-coming { border: 1.5px dashed var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1.5rem; transition: border-color 0.2s; }
+.post-coming:hover { border-color: var(--border); }
+.post-coming-num { font-family: var(--f-display); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); flex-shrink: 0; }
+.post-coming-title { font-family: var(--f-display); font-size: 0.92rem; font-weight: 700; color: var(--mid); flex: 1; }
+.post-coming-badge { display: inline-flex; font-size: 0.65rem; font-weight: 600; background: var(--off); color: var(--mid); padding: 0.2rem 0.65rem; border-radius: 100px; flex-shrink: 0; }
+
+.blog-sidebar { position: sticky; top: 6rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.sidebar-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+.sidebar-card-title { font-family: var(--f-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin-bottom: 1rem; }
+.topic-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.topic-list li { font-size: 0.85rem; color: var(--mid); display: flex; align-items: center; gap: 0.5rem; }
+.topic-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+.about-card { background: var(--ink); border-radius: 12px; padding: 1.5rem; }
+.about-card-title { font-family: var(--f-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.75rem; }
+.about-card-text { font-size: 0.85rem; color: rgba(250,250,249,0.6); line-height: 1.65; margin-bottom: 1.25rem; }
+.about-card-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--f-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--electric-light); transition: color 0.2s; }
+.about-card-link:hover { color: var(--white); }
+
+/* FULL POST */
+.post-full { display: none; max-width: 680px; margin: 0 auto; padding: 5rem 3rem 6rem; }
+.post-full.active { display: block; }
+.post-full-back { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--f-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mid); margin-bottom: 3rem; transition: color 0.2s; cursor: pointer; }
+.post-full-back:hover { color: var(--electric); }
+.post-full-tag { display: inline-flex; align-items: center; gap: 0.4rem; background: #EEF2FF; color: var(--electric); padding: 0.35rem 0.85rem; border-radius: 100px; font-size: 0.72rem; font-weight: 600; margin-bottom: 1.25rem; }
+.post-full h1 { font-family: var(--f-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.post-full-meta { display: flex; align-items: center; gap: 1rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; flex-wrap: wrap; }
+.post-full-meta span { font-size: 0.78rem; color: var(--mid); }
+.post-full-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+.post-body p { color: var(--mid); line-height: 1.85; margin-bottom: 1.5rem; font-size: 1.02rem; }
+.post-body p strong { color: var(--ink); font-weight: 600; }
+.post-body h3 { font-family: var(--f-display); font-size: 1.2rem; font-weight: 800; color: var(--ink); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+.post-callout { background: #EEF2FF; border-left: 3px solid var(--electric); border-radius: 0 10px 10px 0; padding: 1.1rem 1.4rem; margin: 2rem 0; }
+.post-callout p { color: #3730A3; margin-bottom: 0; font-size: 0.93rem; line-height: 1.75; }
+.post-callout p strong { color: #1e1b76; }
+.post-result { background: var(--off); border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.25rem 0; display: flex; align-items: flex-start; gap: 1rem; }
+.post-result-num { font-family: var(--f-display); font-size: 1.8rem; font-weight: 800; color: var(--electric); line-height: 1; flex-shrink: 0; }
+.post-result-text { font-size: 0.9rem; color: var(--mid); line-height: 1.6; padding-top: 0.3rem; }
+.post-result-text strong { color: var(--ink); }
+.post-divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
+.post-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.post-footer-label { font-size: 0.82rem; color: var(--mid); }
+.post-footer-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--electric); color: #fff; padding: 0.7rem 1.5rem; border-radius: 8px; font-family: var(--f-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; transition: background 0.2s; }
+.post-footer-cta:hover { background: #4338CA; }
+
+footer { background: var(--ink); color: var(--white); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .footer-logo { font-family: var(--f-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { font-size: 0.8rem; color: rgba(250,250,249,0.45); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
 .footer-copy { font-size: 0.75rem; color: rgba(250,250,249,0.3); }
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 900px) {
-  nav { padding: 1.1rem 1.5rem; }
-  .nav-links { display: none; }
-  .page { padding: 8rem 1.5rem 5rem; }
+  nav { padding: 1.1rem 1.5rem; } .nav-links { display: none; }
+  .page-hero { padding: 7rem 1.5rem 4rem; }
+  .blog-layout { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+  .blog-sidebar { position: static; }
+  .post-full { padding: 3rem 1.5rem; }
   footer { padding: 1.5rem; }
 }
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>AI Leadership Hub</a>
   <ul class="nav-links">
@@ -118,30 +133,168 @@ footer {
   <a href="mailto:anarubioherrera@hotmail.com" class="nav-cta">Get in touch</a>
 </nav>
 
-<main class="page">
-  <div class="page-bg">BLOG</div>
-  <div class="page-tag"><div class="page-tag-dot"></div>Coming soon</div>
+<div class="page-hero" id="blog-hero">
+  <div class="page-tag">✍️ Perspectives</div>
   <h1>Thoughts on AI<br>that <span>actually matter.</span></h1>
-  <p class="page-sub">No hype. No fluff. Practical takes on AI governance, generative workflows, data strategy, and what's really happening in organisations adopting AI.</p>
-  <div class="topics-preview">
-    <span class="topic-pill">GenAI in the workplace</span>
-    <span class="topic-pill">AI Governance</span>
-    <span class="topic-pill">Data strategy</span>
-    <span class="topic-pill">Agentic AI</span>
-    <span class="topic-pill">ESG &amp; sustainability</span>
-    <span class="topic-pill">MLOps</span>
-    <span class="topic-pill">Leadership &amp; culture</span>
-    <span class="topic-pill">Databricks</span>
+  <p class="page-hero-sub">No hype. No fluff. Practical takes on AI governance, generative workflows, data strategy, and what's really happening in organisations adopting AI.</p>
+</div>
+
+<div class="blog-layout" id="blog-list">
+  <div class="posts">
+
+    <div class="post-featured reveal" onclick="openPost()">
+      <div class="post-featured-header">
+        <div class="post-featured-tag"><div class="post-featured-tag-dot"></div>GenAI · Productivity</div>
+        <h2>How I integrated GenAI into my daily work — and what actually changed</h2>
+      </div>
+      <div class="post-featured-body">
+        <div class="post-meta">
+          <span>April 2025</span>
+          <div class="post-meta-dot"></div>
+          <span>5 min read</span>
+          <div class="post-meta-dot"></div>
+          <span>Ana Rubio Herrera</span>
+        </div>
+        <p class="post-excerpt">I've been using GenAI tools systematically since 2022. Not occasionally, not for one-off tasks — but as a deliberate, embedded part of how I work every day. Here's what I actually did, what changed, and what didn't.</p>
+        <div class="post-read-more">
+          Read post
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-coming reveal">
+      <div class="post-coming-num">02</div>
+      <div class="post-coming-title">Why AI governance is the first thing you should build</div>
+      <span class="post-coming-badge">Coming soon</span>
+    </div>
+    <div class="post-coming reveal">
+      <div class="post-coming-num">03</div>
+      <div class="post-coming-title">What I learned founding a data startup with a lean team</div>
+      <span class="post-coming-badge">Coming soon</span>
+    </div>
+    <div class="post-coming reveal">
+      <div class="post-coming-num">04</div>
+      <div class="post-coming-title">The most common mistake in data platform migrations</div>
+      <span class="post-coming-badge">Coming soon</span>
+    </div>
+
   </div>
-  <a href="index.html" class="btn-back">
+
+  <aside class="blog-sidebar reveal">
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Topics</div>
+      <ul class="topic-list">
+        <li>Generative AI</li>
+        <li>AI Governance</li>
+        <li>Data Strategy</li>
+        <li>Agentic AI</li>
+        <li>MLOps</li>
+        <li>ESG &amp; Sustainability</li>
+        <li>Leadership &amp; Culture</li>
+        <li>Data Platforms</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <div class="about-card-title">About the author</div>
+      <p class="about-card-text">Ana Rubio Herrera — Data &amp; AI Strategy Leader with 10+ years across the UN, Allianz, and her own ESG startup. Based in Barcelona.</p>
+      <a href="index.html#about" class="about-card-link">
+        Full profile
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </aside>
+</div>
+
+<!-- FULL POST -->
+<div class="post-full" id="post-01">
+  <div class="post-full-back" onclick="closePost()">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back to home
-  </a>
-</main>
+    Back to blog
+  </div>
+  <div class="post-full-tag">⚡ GenAI · Productivity</div>
+  <h1>How I integrated GenAI into my daily work — and what actually changed</h1>
+  <div class="post-full-meta">
+    <span>April 2025</span>
+    <div class="post-full-meta-dot"></div>
+    <span>5 min read</span>
+    <div class="post-full-meta-dot"></div>
+    <span>Ana Rubio Herrera</span>
+  </div>
+
+  <div class="post-body">
+    <p>I want to be specific about something upfront: I'm not going to tell you that GenAI "changed everything" in a vague, inspirational way. What I'm going to do is tell you exactly what I did, what the results were, and what I got wrong at first.</p>
+    <p>I started integrating ChatGPT into my workflows in 2022 — when I was founding datalitiks. Not as an experiment. Not because it was trendy. Because we were a lean team with an ambitious product roadmap, and I needed to find a way to produce more without burning out or hiring people we couldn't afford.</p>
+
+    <h3>What I actually changed</h3>
+    <p>The first thing I did was audit every recurring task I spent more than 30 minutes on in a week. Writing, summarising, formatting, explaining, structuring — anything that involved producing text or organising information. That list was longer than I expected.</p>
+    <p>Then I systematically tried using GenAI for each one. Not all at once — one workflow at a time, over several weeks. I kept a simple log: what I tried, what worked, what didn't, how much time it saved.</p>
+    <p>The ones that worked immediately: <strong>drafting first versions of any document</strong> (proposals, reports, emails, frameworks), <strong>summarising long inputs</strong> (research, meeting notes, articles), and <strong>structuring my thinking</strong> when I had a complex problem but hadn't yet organised my approach.</p>
+
+    <div class="post-callout">
+      <p>The shift that made the biggest difference was treating GenAI as a <strong>first draft machine, not a final answer machine.</strong> Every output needed my expertise to review, refine, and make genuinely good. But having a solid first draft to react to — rather than starting from a blank page — changed the pace of everything.</p>
+    </div>
+
+    <h3>The results — honestly</h3>
+
+    <div class="post-result">
+      <div class="post-result-num">~40%</div>
+      <div class="post-result-text">Reduction in time on <strong>individual knowledge tasks</strong> across project workflows at SDG Group — measured over several months of systematic integration.</div>
+    </div>
+    <div class="post-result">
+      <div class="post-result-num">~30%</div>
+      <div class="post-result-text">Faster <strong>platform development timelines</strong> at datalitiks — by integrating GenAI into content, documentation, and development workflows from day one.</div>
+    </div>
+
+    <p>These numbers are real. They're also not magic — they came from deliberate, systematic adoption, not occasional use. The difference between someone who uses GenAI occasionally and someone who has embedded it into their workflows is like the difference between someone who owns a gym membership and someone who actually goes three times a week.</p>
+
+    <h3>What I got wrong at first</h3>
+    <p>I spent too much time in the early weeks trying to get GenAI to produce perfect outputs in one shot. It doesn't work that way. The prompts that produce good results are specific, contextual, and iterative — not one-and-done.</p>
+    <p>I also underestimated how much domain expertise matters. GenAI in the hands of someone who knows what good looks like is a multiplier. GenAI in the hands of someone who can't evaluate the output is a liability. <strong>The tool amplifies whoever is using it.</strong></p>
+
+    <div class="post-divider"></div>
+
+    <p>The practical advice I'd give to anyone starting: pick one task you do every week that involves writing or structuring information. Try doing it with Claude or ChatGPT for four weeks. Keep track of the time. Then decide whether to expand.</p>
+    <p>Don't start with a strategy. Start with one workflow. The strategy will become obvious once you've experienced what's actually possible.</p>
+
+    <div class="post-footer">
+      <span class="post-footer-label">Found this useful? Get in touch.</span>
+      <a href="mailto:anarubioherrera@hotmail.com" class="post-footer-cta">
+        Get in touch
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8M7 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-logo">AI Leadership Hub</div>
+  <ul class="footer-links">
+    <li><a href="learning-hub.html">Learning Hub</a></li>
+    <li><a href="mailto:anarubioherrera@hotmail.com">Email</a></li>
+    <li><a href="https://linkedin.com/in/anarubioherrera" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
   <div class="footer-copy">© 2025 Ana Rubio Herrera</div>
 </footer>
+
+<script>
+function openPost() {
+  document.getElementById('blog-list').style.display = 'none';
+  document.getElementById('blog-hero').style.display = 'none';
+  document.getElementById('post-01').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function closePost() {
+  document.getElementById('post-01').style.display = 'none';
+  document.getElementById('blog-list').style.display = 'grid';
+  document.getElementById('blog-hero').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.querySelectorAll('.reveal').forEach(el => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 }).observe(el);
+});
+</script>
 </body>
 </html>
